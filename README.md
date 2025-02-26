@@ -1,7 +1,7 @@
 # Adguard Home For Magisk Mod
 - 一个通过重定向并过滤 DNS 请求来屏蔽广告的 Magisk/KernelSU 模块
-- 我们在官方的基础上增加了IFW规则等方法禁用广告
-- 我们修改了官方内置规则并在此基础上增加了自定义规则
+- 我们在官方的基础上增加了IFW规则、删除/占用广告文件夹等方法禁用广告
+- 我们内置了8680的拦截规则并在此基础上增加了自定义规则
 
 # 教程
 - 用法教程及常见问题解答请前往官方文档 [Wiki](https://github.com/twoone-3/AdGuardHomeForMagisk/wiki) 查看

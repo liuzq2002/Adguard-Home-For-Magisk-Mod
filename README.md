@@ -7,9 +7,8 @@
 # 教程
 - 用法教程及常见问题解答请前往官方文档 [Wiki](https://github.com/twoone-3/AdGuardHomeForMagisk/wiki) 查看
 - 如果你使用的是Magisk框架，那么点击模块旁边的操作按钮就可以进入Web UI管理器
-- 测试网站：
-测速：https://test.ustc.edu.cn/
-测试广告拦截率（达到96%或以上是正常）：https://paileactivist.github.io/toolz/adblock.html
+- 测速：https://test.ustc.edu.cn/
+- 测试广告拦截率（达到96%或以上是正常）：https://paileactivist.github.io/toolz/adblock.html
 
 # 鸣谢
 - [AdguardHome_magisk](https://github.com/410154425/AdGuardHome_magisk)

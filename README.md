@@ -5,8 +5,9 @@
 - 重构了模块几乎所有的底层脚本，带来更低的延迟更好的性能以及功耗优化
 
 # 教程
-- 用法教程及常见问题解答请前往官方文档 [Wiki](https://github.com/twoone-3/AdGuardHomeForMagisk/wiki) 查看
+一定要关闭或卸载掉其他广告拦截模块、代理模块以及无障碍跳过软件、VPN代理去广告、浏览器自带广告拦截、私人DNS等等
 - 如果你使用的是Magisk框架，那么点击模块旁边的操作按钮就可以进入Web UI管理器
+- 使用Chash Meta导致无法正常过滤的，可以去Chash Meta设置-应用中关闭系统代理（我测试依然可以正常代理，并且广告可以过滤了）
 - 测速：https://test.ustc.edu.cn/
 - 测试广告拦截率（达到96%或以上是正常）：https://paileactivist.github.io/toolz/adblock.html
 

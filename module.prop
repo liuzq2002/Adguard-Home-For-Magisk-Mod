@@ -1,0 +1,7 @@
+id=AdGuardHome
+name=AdGuard Home For Magisk
+version=20250323
+versionCode=202503230
+author=twoone3（原作者） 春梦无痕(二改作者/更改内置规则和配置)
+description=通过DNS层面过滤广告、防DNS劫持，添加ifw规则禁用广告服务，支持订阅过滤规则，管理器页面可以点击操作按钮也可以在浏览器输入127.0.0.1:3000，账号和密码均为root
+updateJson=https://raw.githubusercontent.com/liuzq2002/Adguard-Home-For-Magisk-Mod/main/Update.json

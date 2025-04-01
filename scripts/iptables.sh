@@ -1,53 +1,47 @@
 #!/system/bin/sh
-
 AGH_DIR="/data/adb/agh"
-source "$AGH_DIR/scripts/config.sh"
+. "$AGH_DIR/scripts/config.sh"
 
-# 应用/清理规则
-apply_iptables_rules() {
-[ "$enable_iptables" != "true" ] && [ "$enable_iptables" != "1" ] && return
-if [ "$1" = "-A" ]; then
+# DNS重定向
+handle_dns() {
+case $enable_iptables in
+true|1)
+for p in udp tcp; do
+$iptables -t nat -A ADGUARD -p $p --dport 53 -j REDIRECT --to-ports $redir_port
+case $block_ipv6_dns in
+true|1) $ip6tables -C OUTPUT -p $p --dport 53 -j DROP >/dev/null 2>&1 ||
+$ip6tables -A OUTPUT -p $p --dport 53 -j DROP ;;
+esac
+done ;;
+esac
+}
+
+# 规则管理
+apply_rules() {
+case $enable_iptables in
+true|1) case $1 in
+-A)
 $iptables -t nat -N ADGUARD 2>/dev/null
-$iptables -t nat -F ADGUARD 2>/dev/null
-handle_uid_rules
-handle_dns_redirection
-$iptables -t nat -C OUTPUT -j ADGUARD 2>/dev/null || $iptables -t nat -A OUTPUT -j ADGUARD
-return
-fi
-$iptables -t nat -D OUTPUT -j ADGUARD 2>/dev/null
-$iptables -t nat -F ADGUARD 2>/dev/null
-$iptables -t nat -X ADGUARD 2>/dev/null
-$ip6tables -D OUTPUT -p udp -m multiport --dports 53 -j DROP 2>/dev/null
-$ip6tables -D OUTPUT -p tcp -m multiport --dports 53 -j DROP 2>/dev/null
+$iptables -t nat -F ADGUARD
+handle_dns
+$iptables -t nat -C OUTPUT -j ADGUARD >/dev/null 2>&1 ||
+$iptables -t nat -A OUTPUT -j ADGUARD ;;
+-D)
+$iptables -t nat -D OUTPUT -j ADGUARD >/dev/null 2>&1
+$iptables -t nat -F ADGUARD >/dev/null 2>&1
+$iptables -t nat -X ADGUARD >/dev/null 2>&1
+case $block_ipv6_dns in
+true|1) for p in udp tcp; do
+$ip6tables -D OUTPUT -p $p --dport 53 -j DROP >/dev/null 2>&1
+done ;;
+esac ;;
+esac ;;
+esac
 }
 
-# DNS 重定向
-handle_dns_redirection() {
-[ "$enable_iptables" != "true" ] && [ "$enable_iptables" != "1" ] && return
-$iptables -t nat -N ADGUARD 2>/dev/null
-$iptables -t nat -F ADGUARD 2>/dev/null
-$iptables -t nat -A ADGUARD -p udp -m multiport --dports 53 -j REDIRECT --to-ports "$redir_port"
-$iptables -t nat -A ADGUARD -p tcp -m multiport --dports 53 -j REDIRECT --to-ports "$redir_port"
-if [ "$block_ipv6_dns" = "true" ] || [ "$block_ipv6_dns" = "1" ]; then
-$ip6tables -A OUTPUT -p udp -m multiport --dports 53 -j DROP
-$ip6tables -A OUTPUT -p tcp -m multiport --dports 53 -j DROP
-fi
-}
-
-# 应用 UID 规则
-handle_uid_rules() {
-[ "$enable_iptables" != "true" ] && [ "$enable_iptables" != "1" ] && return
-uids=$( [ "${#packages_list[@]}" -gt 0 ] && grep -E "$(IFS="|"; echo "${packages_list[*]}")" /data/system/packages.list | awk '{print $2}' )
-$iptables -t nat -A ADGUARD -m owner --uid-owner "$adg_user" --gid-owner "$adg_group" -j RETURN
-for uid in $uids; do
-rule="-j REDIRECT --to-ports $redir_port"
-[ "$use_blacklist" = "true" ] || [ "$use_blacklist" = "1" ] && rule="-j RETURN"
-$iptables -t nat -A ADGUARD -m owner --uid-owner "$uid" $rule
-done
-}
-
-case "$1" in
-enable) apply_iptables_rules "-A" ;;
-disable) apply_iptables_rules "-D" ;;
+# 主入口
+case $1 in
+enable) apply_rules -A ;;
+disable) apply_rules -D ;;
 *) echo "Usage: $0 {enable|disable}" ;;
 esac

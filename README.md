@@ -1,5 +1,5 @@
 # Adguard Home For Magisk Mod
-- 一个通过重定向并过滤 DNS 请求来屏蔽广告的 Magisk/KernelSU/Apatch 模块
+- 一个通过重定向并过滤DNS请求来屏蔽广告的Magisk/KernelSU/Apatch模块
 - 在Twoone3的基础上增加了IFW规则、删除/占用广告文件夹等方法禁用广告
 - 内置了8680的拦截规则并在此基础上增加了自定义规则
 - 重构了模块几乎所有的底层脚本，带来更低的延迟更好的性能以及功耗优化

@@ -3,9 +3,6 @@
 - 在Twoone3的基础上增加了IFW规则、删除/占用广告文件夹等方法禁用广告
 - 内置了8680的拦截规则并在此基础上增加了自定义规则
 - 重构了模块几乎所有的底层脚本，带来更低的延迟更好的性能以及功耗优化
-# 获取联系方式以及渠道
-- 聊天闲聊群：746640464
-- 反馈测试群：584063443
 # 风险提示，不看请别怪我没提醒
 - ⚠️模块会导致优惠券无法正常领取，如无法正常领取这并非误杀
 - ⚠️部分软件的看广告领金币无法正常领取，如无法使用这并非误杀
@@ -37,7 +34,9 @@
 - 使用Chash Meta导致无法正常过滤的，可以去Chash Meta设置-应用中关闭系统代理（我测试依然可以正常代理，并且广告可以过滤了）
 - 测速：https://test.ustc.edu.cn/
 - 测试广告拦截率（达到96%或以上是正常）：https://paileactivist.github.io/toolz/adblock.html
-
+# 获取联系方式以及渠道
+- 聊天闲聊群：746640464
+- 反馈测试群：584063443
 # 鸣谢项目名单
 - [AdguardHome_magisk](https://github.com/410154425/AdGuardHome_magisk)
 - [akashaProxy](https://github.com/ModuleList/akashaProxy)

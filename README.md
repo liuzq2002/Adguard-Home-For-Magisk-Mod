@@ -34,7 +34,7 @@
 - 使用Chash Meta导致无法正常过滤的，可以去Chash Meta设置-应用中关闭系统代理（我测试依然可以正常代理，并且广告可以过滤了）
 - 测速：https://test.ustc.edu.cn/
 - 测试广告拦截率（达到96%或以上是正常）：https://paileactivist.github.io/toolz/adblock.html
-# 获取联系方式以及渠道
+# 获取联系方式
 - 聊天闲聊群：746640464
 - 反馈测试群：584063443
 # 鸣谢项目名单

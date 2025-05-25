@@ -1,0 +1,69 @@
+name: 问题反馈
+description: 提交AdguardHome模块相关问题报告
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **反馈前必做检查**：
+        1. 已关闭/卸载同类模块、代理工具、无障碍广告跳过软件
+        2. 已禁用浏览器广告拦截/私人DNS/VPN广告过滤
+        3. 测试过 [广告拦截率](https://paileactivist.github.io/toolz/adblock.html) 且结果 ≤95%
+
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: "问题描述"
+      description: 清晰说明遇到的问题现象
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: "问题类型"
+      options:
+        - 广告未拦截
+        - 网络功能异常
+        - WebUI访问问题
+        - 模块安装失败
+        - 其他异常
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: "复现步骤"
+      description: 如何触发该问题？（示例：1. 打开XX应用 2. 进入XX页面 3. 出现XX广告）
+      placeholder: 请按步骤详细描述...
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: environment-check
+    attributes:
+      label: "环境状态检查"
+      description: 请勾选所有符合项
+      options:
+        - label: 已开启代理工具（如Clash/V2Ray）
+          required: false
+        - label: 启用了私人DNS
+          required: false
+        - label: 使用非标准DNS服务（如DoH/DoT）
+          required: false
+        - label: 已执行清除应用数据操作
+          required: false
+
+  - type: textarea
+    id: technical-info
+    attributes:
+      label: "技术信息"
+      description: 请提供以下信息（留空需说明原因）
+      placeholder: |
+        - 模块版本： 
+        - Android版本： 
+        - 设备型号： 
+        - ROOT方案：Magisk/KernelSU/APatch
+        - 测试截图链接： 

@@ -55,7 +55,7 @@ if [ -d "$AGH_DIR" ]; then
     sleep 1
   fi
 
-  i18n_print "- Keep old configuration? (Vol+ = Yes, Vol- = No)" "- 是否保留原来的配置文件？（音量上键 = 是，下键 = 否）"
+  i18n_print "- Keep old configuration? It is recommended to press the volume down button(Vol+ = Yes, Vol- = No)" "- 是否保留原来的配置文件？推荐按音量下键（上键 = 是，下键 = 否）"
   
   key_click=""
   while [ -z "$key_click" ]; do

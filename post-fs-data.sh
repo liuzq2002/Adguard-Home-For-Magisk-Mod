@@ -13,6 +13,18 @@ cp /data/adb/agh/ifw/com.ct.client.xml /data/system/ifw
 rm -rf /data/user/0/tv.danmaku.bili/files/res_cache
 touch /data/user/0/tv.danmaku.bili/files/res_cache
 chattr +i /data/user/0/tv.danmaku.bili/files/res_cache
+#去除哔哩哔哩的更新推送
+rm -rf /data/user/0/tv.danmaku.bili/files/update
+touch /data/user/0/tv.danmaku.bili/files/update
+chattr +i /data/user/0/tv.danmaku.bili/files/update
+#禁止哔哩哔哩下载基础组件库
+rm -rf /data/user/0/tv.danmaku.bili/app_mod_resource
+touch /data/user/0/tv.danmaku.bili/app_mod_resource
+chattr +i /data/user/0/tv.danmaku.bili/app_mod_resource
+#禁止谷歌版BiliBili下载基础组件库
+rm -rf /data/user/0/com.bilibili.app.in/app_mod_resource
+touch /data/user/0/com.bilibili.app.in/app_mod_resource
+chattr +i /data/user/0/com.bilibili.app.in/app_mod_resource
 #去除中国广电的开屏广告
 rm -rf /data/user/0/com.ai.obc.cbn.app/files/splashShow
 touch /data/user/0/com.ai.obc.cbn.app/files/splashShow

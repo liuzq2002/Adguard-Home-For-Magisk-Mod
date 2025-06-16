@@ -11,9 +11,18 @@ rm -rf /data/system/ifw
 mkdir /data/system/ifw
 
 #卸载时还原被替换的文件
-#哔哩哔哩
+#哔哩哔哩广告
 chattr -i /data/user/0/tv.danmaku.bili/files/res_cache
 rm -rf /data/user/0/tv.danmaku.bili/files/res_cache
+#哔哩哔哩下载更新
+chattr -i /data/user/0/tv.danmaku.bili/files/update
+rm -rf /data/user/0/tv.danmaku.bili/files/update
+#哔哩哔哩基础组件库
+chattr -i /data/user/0/tv.danmaku.bili/app_mod_resource
+rm -rf /data/user/0/tv.danmaku.bili/app_mod_resource
+#谷歌版BiliBili基础组件库
+chattr -i /data/user/0/com.bilibili.app.in/app_mod_resource
+rm -rf /data/user/0/com.bilibili.app.in/app_mod_resource
 #知乎
 chattr -i /data/data/com.zhihu.android/files/ad
 rm -rf /data/data/com.zhihu.android/files/ad

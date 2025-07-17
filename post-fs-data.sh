@@ -3,6 +3,13 @@ rm -rf /data/system/ifw
 mkdir /data/system/ifw
 #去除中国联通的广告
 cp /data/adb/agh/ifw/com.sinovatech.unicom.ui.xml /data/system/ifw
+#去除美团外卖的开屏广告
+rm -rf data/data/com.sankuai.meituan.takeoutnew/files/cips/common/waimai/assets/ad
+touch data/data/com.sankuai.meituan.takeoutnew/files/cips/common/waimai/assets/ad
+chattr +i data/data/com.sankuai.meituan.takeoutnew/files/cips/common/waimai/assets/ad
+rm -rf /data/media/0/Android/data/com.sankuai.meituan.takeoutnew/files/cips/common/waimai/assets/promotion
+touch /data/media/0/Android/data/com.sankuai.meituan.takeoutnew/files/cips/common/waimai/assets/promotion
+chattr +i /data/media/0/Android/data/com.sankuai.meituan.takeoutnew/files/cips/common/waimai/assets/promotion
 #去除知乎的开屏广告
 rm -rf /data/data/com.zhihu.android/files/ad
 touch /data/data/com.zhihu.android/files/ad

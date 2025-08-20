@@ -6,13 +6,13 @@
 - 重构了模块几乎所有的底层脚本，带来更低的延迟更好的性能以及功耗优化
 - 更新安装的时候一定要选择音量下，不然没法更新配置文件
 - 不看教程不要来找我反馈，点此链接直接跳转到教程： [点击跳转](https://github.com/liuzq2002/Adguard-Home-For-Magisk-Mod/tree/main?tab=readme-ov-file#-%E6%95%99%E7%A8%8B%E4%B8%8D%E7%9C%8B%E7%9A%84%E8%AF%9D%E5%87%BA%E4%BA%8B%E5%88%AB%E5%88%B0%E5%A4%84%E6%89%BE%E6%88%91%E9%97%AE%E9%A2%98)
-# ⚠️ 风险提示，不看请别怪我没提醒
+## ⚠️ 风险提示，不看请别怪我没提醒
 - 模块会导致优惠券无法正常领取，如无法正常领取这并非误杀
 - 部分软件的看广告领金币无法正常领取，如无法使用这并非误杀
 - 例如百度等企业会将广告与金融产品绑定，如发现金融借贷类无法使用这并非误杀
 - 模块不可以与同类模块同时使用，更详细的请看教程那一栏
 - 模块无法拦截广告与内容为同一域名的，比如QQ、微信、支付宝等部分广告
-# 💡 模块相比于其他的方案有哪些优点？
+## 💡 模块相比于其他的方案有哪些优点？
 - 相比于私人DNS有哪些优点？
 1. 私人dns需要不断的向服务器进行访问，一旦服务器超负荷或过载以及服务器连不上的话就会导致断网
 2. 由于私人dns需要向服务器进行访问，所以存在很大的网络延迟问题（因为需要向服务器请求过滤以后再返回到你的设备上）
@@ -37,10 +37,10 @@
 - 使用Chash Meta导致无法正常过滤的，可以去Chash Meta设置-网络中关闭系统代理（我测试依然可以正常代理，并且广告可以过滤了）
 - 测速：https://test.ustc.edu.cn/
 - 测试广告拦截率（达到96%或以上是正常）：https://paileactivist.github.io/toolz/adblock.html
-# 💬 获取联系方式
+## 💬 获取联系方式
 - 聊天闲聊群：[点击链接加入群聊](https://qun.qq.com/universal-share/share?ac=1&authKey=l2FNOfui75SDr9n8qTfNjibiF1aTpQ%2B0cmJrw7iKnj%2B95dyExNG5LrdCJu5%2FEKrQ&busi_data=eyJncm91cENvZGUiOiI3NDY2NDA0NjQiLCJ0b2tlbiI6ImhOUWgzVTFPYnRUcEw1ZEJ1TnhkOGI4b0ZQSFV6cmtuVkludk5EcDR4WTFXSU5PelVmdnZoUHIwOGEreHVnNEYiLCJ1aW4iOiIzMzEzODI0NTc1In0%3D&data=8QbRVdmvcvuIPhoaZYMQRNm8tdG9QvQ_d6dLJvGEW_XEOWLbexxs8SgTRPfW51Tpe7IGWAu3PpizEpFa9oO1LQ&svctype=4&tempid=h5_group_info)
 - 反馈测试群：[点击链接加入群聊](https://qun.qq.com/universal-share/share?ac=1&authKey=xuYEMvAvyzLDhQ58xxwN71dyblHMrMB9YSG4ZpFpKrFz1NT4WdL19uSE4XJE1dt6&busi_data=eyJncm91cENvZGUiOiI1ODQwNjM0NDMiLCJ0b2tlbiI6Im9aM2R1ejBUeDJSWDVJaWNFdmE3bE5YdDdUam5OczZ3R2Z1MmFrYTlpZXNGV2EySFlZRVQrQ0NDOEhoSGZhTHEiLCJ1aW4iOiIzMzEzODI0NTc1In0%3D&data=e5gCMNYudfN2GeBXHTj6s3dwh37WNTWTcpws90_eZ_huBBXuanzL6MQ1FvfjRxLxN3oraEJUF8QAhN0oYAErKA&svctype=4&tempid=h5_group_info)
-# 🙏 鸣谢项目名单
+## 🙏 鸣谢项目名单
 - [AdguardHome_magisk](https://github.com/410154425/AdGuardHome_magisk)
 - [akashaProxy](https://github.com/ModuleList/akashaProxy)
 - [box_for_magisk](https://github.com/taamarin/box_for_magisk)

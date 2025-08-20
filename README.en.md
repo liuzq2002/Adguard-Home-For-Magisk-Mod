@@ -1,5 +1,5 @@
 # Adguard Home For Android
-[简体中文](README.md)|[English](README.en.md)
+**简体中文** |[English](README.en.md)
 - A universal Root manager with module system that blocks ads by redirecting and filtering DNS requests
 - Based on Twoone3's work, with added methods to disable ads by deleting/occupying ad folders
 - Built-in 8680 blocking rules with support for custom rules

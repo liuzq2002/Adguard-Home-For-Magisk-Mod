@@ -1,5 +1,5 @@
 # Adguard Home For Android
-[简体中文](README.md) |[English](README.en.md)
+ **简体中文**|[English](README.en.md)
 - 通过重定向并过滤DNS请求来屏蔽广告且带有模块系统的Root管理器通用
 - 在Twoone3的基础上增加了删除/占用广告文件夹的方法禁用广告
 - 内置了8680的拦截规则并在此基础上增加了自定义规则

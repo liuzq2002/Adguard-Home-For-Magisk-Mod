@@ -5,7 +5,7 @@
 - Built-in 8680 blocking rules with support for custom rules
 - Refactored almost all underlying scripts for lower latency, better performance, and power optimization
 - **⚠️ Important:** When updating, make sure to press Volume Down to update configuration files
-
+- **Please read the tutorial before requesting support. Click the link below to jump directly to the tutorial section:** [Jump to Tutorial](#https://github.com/liuzq2002/Adguard-Home-For-Magisk-Mod/blob/main/README.en.md#-tutorial--read-before-use)
 # ⚠️ Risk Notice – Please Read
 
 - May interfere with coupon redemption functionality in some apps (not a false positive)

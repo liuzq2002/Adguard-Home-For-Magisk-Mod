@@ -4,7 +4,7 @@
 - Based on Twoone3's work, with added methods to disable ads by deleting/occupying ad folders
 - Built-in 8680 blocking rules with support for custom rules
 - Refactored almost all underlying scripts for lower latency, better performance, and power optimization
-- Please read the tutorial before requesting support. Click the link below to jump directly to the tutorial section:[Jump to Tutorial](https://github.com/liuzq2002/Adguard-Home-For-Magisk-Mod/blob/main/README.en.md#-tutorial--read-before-use)
+- Please read the tutorial before requesting support. Click the link below to jump directly to the tutorial section: [Jump to Tutorial](https://github.com/liuzq2002/Adguard-Home-For-Magisk-Mod/blob/main/README.en.md#-tutorial--read-before-use)
 ## ⚠️ Risk Notice – Please Read
 - May interfere with coupon redemption functionality in some apps (not a false positive)
 - May prevent reward systems based on watching ads (not a false positive)
@@ -33,8 +33,8 @@
 - If ads aren't blocked, try clearing the app’s cache and data, then restarting it
 - Magisk users: Click the gear icon next to the module to access the Web UI manager
 - If using Clash Meta, disable system proxy in Network settings (tested and working)
-- USTC Speedtest:[Jump to Tutorial](https://test.ustc.edu.cn)
-- Ad block test (aim for ≥96%):[Jump to Tutorial](https://paileactivist.github.io/toolz/adblock.html)
+- USTC Speedtest: [Jump to Tutorial](https://test.ustc.edu.cn)
+- Ad block test (aim for ≥96%): [Jump to Tutorial](https://paileactivist.github.io/toolz/adblock.html)
 ## 🙏 Credits
 - [AdguardHome_magisk](https://github.com/410154425/AdGuardHome_magisk)
 - [akashaProxy](https://github.com/ModuleList/akashaProxy)

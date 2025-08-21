@@ -4,8 +4,7 @@
 - 在Twoone3的基础上增加了删除/占用广告文件夹的方法禁用广告
 - 内置了8680的拦截规则并在此基础上增加了自定义规则
 - 重构了模块几乎所有的底层脚本，带来更低的延迟更好的性能以及功耗优化
-- 更新安装的时候一定要选择音量下，不然没法更新配置文件
-- 不看教程不要来找我反馈，点此链接直接跳转到教程： [点击跳转](https://github.com/liuzq2002/Adguard-Home-For-Magisk-Mod/tree/main?tab=readme-ov-file#-%E6%95%99%E7%A8%8B%E4%B8%8D%E7%9C%8B%E7%9A%84%E8%AF%9D%E5%87%BA%E4%BA%8B%E5%88%AB%E5%88%B0%E5%A4%84%E6%89%BE%E6%88%91%E9%97%AE%E9%A2%98)
+- 不看教程不要来找我反馈，点此链接直接跳转到教程：[点击跳转](https://github.com/liuzq2002/Adguard-Home-For-Magisk-Mod/tree/main?tab=readme-ov-file#-%E6%95%99%E7%A8%8B%E4%B8%8D%E7%9C%8B%E7%9A%84%E8%AF%9D%E5%87%BA%E4%BA%8B%E5%88%AB%E5%88%B0%E5%A4%84%E6%89%BE%E6%88%91%E9%97%AE%E9%A2%98)
 ## ⚠️ 风险提示，不看请别怪我没提醒
 - 模块会导致优惠券无法正常领取，如无法正常领取这并非误杀
 - 部分软件的看广告领金币无法正常领取，如无法使用这并非误杀
@@ -35,8 +34,8 @@
 - 如果遇到广告拦截不掉的，请先尝试清除该应用的全部缓存并杀掉后台重试（如果再不行的话，清除该应用的全部数据后重试）
 - 如果你使用的是Magisk框架，那么点击模块旁边的操作按钮就可以进入Web UI管理器
 - 使用Chash Meta导致无法正常过滤的，可以去Chash Meta设置-网络中关闭系统代理（我测试依然可以正常代理，并且广告可以过滤了）
-- 测速：https://test.ustc.edu.cn/
-- 测试广告拦截率（达到96%或以上是正常）：https://paileactivist.github.io/toolz/adblock.html
+- 中国科学大学测速网：[点击跳转](https://test.ustc.edu.cn)
+- 测试广告拦截率（达到96%或以上是正常）：[点击跳转](https://paileactivist.github.io/toolz/adblock.html)
 ## 💬 获取联系方式
 - 聊天闲聊群：[点击链接加入群聊](https://qun.qq.com/universal-share/share?ac=1&authKey=l2FNOfui75SDr9n8qTfNjibiF1aTpQ%2B0cmJrw7iKnj%2B95dyExNG5LrdCJu5%2FEKrQ&busi_data=eyJncm91cENvZGUiOiI3NDY2NDA0NjQiLCJ0b2tlbiI6ImhOUWgzVTFPYnRUcEw1ZEJ1TnhkOGI4b0ZQSFV6cmtuVkludk5EcDR4WTFXSU5PelVmdnZoUHIwOGEreHVnNEYiLCJ1aW4iOiIzMzEzODI0NTc1In0%3D&data=8QbRVdmvcvuIPhoaZYMQRNm8tdG9QvQ_d6dLJvGEW_XEOWLbexxs8SgTRPfW51Tpe7IGWAu3PpizEpFa9oO1LQ&svctype=4&tempid=h5_group_info)
 - 反馈测试群：[点击链接加入群聊](https://qun.qq.com/universal-share/share?ac=1&authKey=xuYEMvAvyzLDhQ58xxwN71dyblHMrMB9YSG4ZpFpKrFz1NT4WdL19uSE4XJE1dt6&busi_data=eyJncm91cENvZGUiOiI1ODQwNjM0NDMiLCJ0b2tlbiI6Im9aM2R1ejBUeDJSWDVJaWNFdmE3bE5YdDdUam5OczZ3R2Z1MmFrYTlpZXNGV2EySFlZRVQrQ0NDOEhoSGZhTHEiLCJ1aW4iOiIzMzEzODI0NTc1In0%3D&data=e5gCMNYudfN2GeBXHTj6s3dwh37WNTWTcpws90_eZ_huBBXuanzL6MQ1FvfjRxLxN3oraEJUF8QAhN0oYAErKA&svctype=4&tempid=h5_group_info)

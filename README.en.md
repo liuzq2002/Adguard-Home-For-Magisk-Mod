@@ -11,7 +11,7 @@
 - Some services (e.g., Baidu) bundle ads with financial products – blocking may affect those features
 - Do **not** use with other similar ad-blocking modules
 - Cannot block ads served from the same domain as content (e.g., QQ, WeChat, Alipay)
-## Advantages Over Other Solutions
+## 💡 Advantages Over Other Solutions
 ### vs. Private DNS
 1. No server dependency → no downtime or overload issues
 2. Lower latency – processing happens locally

@@ -33,7 +33,7 @@
 - If ads aren't blocked, try clearing the app’s cache and data, then restarting it
 - Magisk users: Click the gear icon next to the module to access the Web UI manager
 - If using Clash Meta, disable system proxy in Network settings (tested and working)
-- Speed test:[Jump to Tutorial](https://test.ustc.edu.cn)
+- USTC Speedtest:[Jump to Tutorial](https://test.ustc.edu.cn)
 - Ad block test (aim for ≥96%):[Jump to Tutorial](https://paileactivist.github.io/toolz/adblock.html)
 ## 🙏 Credits
 - [AdguardHome_magisk](https://github.com/410154425/AdGuardHome_magisk)

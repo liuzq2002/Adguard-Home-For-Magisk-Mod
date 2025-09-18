@@ -70,6 +70,13 @@ block_ad() {
     
     #小爱音箱
     block_ad "/data/media/0/Android/data/com.xiaomi.mico/files/log/VoipSdk"
+    
+    #高德地图
+    block_ad "/data/data/com.autonavi.minimap/files/LaunchDynamicResource"
+    block_ad "/data/media/0/Android/data/com.autonavi.minimap/cache/ajxFileDownload"
+    
+    #抖音App
+    block_ad "/data/data/com.ss.android.ugc.aweme/files/im_common_resource/common_resource/scene_strategy/incentive_chat_group_panel_alpha_video_festival"
 
 # 守护ModuleMOD.sh
 while true; do

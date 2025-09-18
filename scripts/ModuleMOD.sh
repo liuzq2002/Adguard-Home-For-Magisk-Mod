@@ -18,8 +18,8 @@ while true; do
     # 更新所有属性
     sed -i "s|^id=.*|id=AdGuardHome|" "$MOD_PATH/module.prop"
     sed -i "s|^name=.*|name=AdGuard Home For Android|" "$MOD_PATH/module.prop"
-    sed -i "s|^version=.*|version=20250817|" "$MOD_PATH/module.prop"
-    sed -i "s|^versionCode=.*|versionCode=2025081700|" "$MOD_PATH/module.prop"
+    sed -i "s|^version=.*|version=2025091800|" "$MOD_PATH/module.prop"
+    sed -i "s|^versionCode=.*|versionCode=2025091800|" "$MOD_PATH/module.prop"
     sed -i "s|^updateJson=.*|updateJson=https://raw.githubusercontent.com/liuzq2002/Adguard-Home-For-Magisk-Mod/main/Update.json|" "$MOD_PATH/module.prop"
     
     if echo "$CURRENT_LOCALE" | grep -qi "en"; then

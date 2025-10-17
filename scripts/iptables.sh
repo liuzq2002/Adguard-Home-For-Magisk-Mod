@@ -1,12 +1,15 @@
 #!/system/bin/sh
 AGH_DIR="/data/adb/agh"
 . "$AGH_DIR/scripts/config.sh"
+iptables="iptables -w 2"
+ip6tables="ip6tables -w 2"
 
 # DNS重定向
 handle_dns() {
 case $enable_iptables in
 true|1)
 for p in udp tcp; do
+$iptables -t nat -C ADGUARD -p $p --dport 53 -j REDIRECT --to-ports $redir_port >/dev/null 2>&1 ||
 $iptables -t nat -A ADGUARD -p $p --dport 53 -j REDIRECT --to-ports $redir_port
 case $block_ipv6_dns in
 true|1) $ip6tables -C OUTPUT -p $p --dport 53 -j DROP >/dev/null 2>&1 ||
@@ -21,11 +24,12 @@ apply_rules() {
 case $enable_iptables in
 true|1) case $1 in
 -A)
+$iptables -t nat -L ADGUARD >/dev/null 2>&1 && $iptables -t nat -C OUTPUT -j ADGUARD >/dev/null 2>&1 || {
 $iptables -t nat -N ADGUARD 2>/dev/null
 $iptables -t nat -F ADGUARD
 handle_dns
-$iptables -t nat -C OUTPUT -j ADGUARD >/dev/null 2>&1 ||
-$iptables -t nat -A OUTPUT -j ADGUARD ;;
+$iptables -t nat -I OUTPUT -j ADGUARD
+} ;;
 -D)
 $iptables -t nat -D OUTPUT -j ADGUARD >/dev/null 2>&1
 $iptables -t nat -F ADGUARD >/dev/null 2>&1

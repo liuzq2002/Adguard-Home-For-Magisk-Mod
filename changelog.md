@@ -1,7 +1,2 @@
-- 新增屏蔽安居客App、买单吧App、中国移动、书旗小说、度小满/有钱花
-- 优化豆包App、KiMiAPP的误杀
-- 将/data/adb/agh/scripts/service.sh合并到/data/adb/modules/AdGuardHome/service.sh，大大降低部分脚本启动失败的问题
-- 新增Github加速，大大缓解了访问不上的问题
-- 优化了/data/adb/agh/scripts/NoAdsService.sh
-Adguardhome过滤内核更新到v0.108.0-b.77
-
+- 解决了通知推送的问题，解决了夸克网盘、OPPO主题卡片的误杀
+- 内核回退至v0.107.67，应该会解决过滤问题

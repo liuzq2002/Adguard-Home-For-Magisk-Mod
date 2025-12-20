@@ -1,5 +1,2 @@
-- 新增拦截闲鱼App、航旅纵横、京东App
-- 优化了工银e生活、徐小包奶茶小程序、Kimi、clicli动漫的以及之前的误杀
-- 更新AdguardHome过滤内核版本为v0.107.71
-- 兼容了Surfing、Box代理模块
-- 在/data/adb/agh/scripts/config.sh配置文件中加入了日志开关（旦不建议关闭）
+- 修复了兼容Surfing的问题（就是得麻烦你们重新折腾一下Surfing配置文件）
+- 新增小福家App、萤石云视频的广告拦截规则

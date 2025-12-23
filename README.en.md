@@ -20,6 +20,7 @@
 1. Encrypted DNS (DoH) support
 2. Prevents DNS hijacking
 3. Harder to detect and block
+4. No need to flash the meta module, achieving even better concealment
 ### vs. Accessibility-based Ad Skippers (e.g., Li Tiao Tiao)
 1. No background process killing issues
 2. No UI lag or performance drain

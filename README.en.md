@@ -4,7 +4,6 @@
 - Based on Twoone3's work, with added methods to disable ads by deleting/occupying ad folders
 - Built-in 8680 blocking rules with support for custom rules
 - Refactored almost all underlying scripts for lower latency, better performance, and power optimization
-- Already compatible with Surfing and Box proxy modules; others are not compatible at this time.
 - Please read the tutorial before requesting support. Click the link below to jump directly to the tutorial section: [Jump to Tutorial](https://github.com/liuzq2002/Adguard-Home-For-Magisk-Mod/blob/main/README.en.md#-tutorial--read-before-use)
 ## ⚠️ Risk Notice – Please Read
 - May interfere with coupon redemption functionality in some apps (not a false positive)

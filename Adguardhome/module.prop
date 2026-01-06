@@ -1,0 +1,7 @@
+id=AdGuardHome
+name=AdGuard Home For Android
+version=0000
+versionCode=00000
+author=
+description=设备未重启，请立即重启 (重启后仍提示，请排查设备环境) | Restart not detected. Reboot now (If prompt persists, check device environment)
+updateJson=

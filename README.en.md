@@ -29,7 +29,7 @@
 1. Less detectable – no app hooking or injection
 2. Broader coverage – blocks ads system-wide, not per-app
 ## 📖 Tutorial – Read Before Use
-- Disable or uninstall other ad-blocking modules, proxy tools, accessibility services, VPN ad blockers, browser ad blockers, and modules like Scene, iWanJi Toolbox, ZN-Audit-Patch, Zygisk-Sui, etc.
+- Disable or uninstall other ad-blocking modules, proxy tools, accessibility services, VPN ad blockers, browser ad blockers, ZN-Audit-Patch, Zygisk-Sui, etc.
 - If ads aren't blocked, try clearing the app’s cache and data, then restarting it
 - Magisk users: Click the gear icon next to the module to access the Web UI manager
 - If using Clash Meta, disable system proxy in Network settings (tested and working)

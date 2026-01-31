@@ -28,6 +28,9 @@
 ### vs. LSPosed Modules
 1. Less detectable – no app hooking or injection
 2. Broader coverage – blocks ads system-wide, not per-app
+### Compared to a VPN, what are the advantages of ad blocking?
+1. No need to worry about apps detecting that a VPN is active
+2. No need to worry about disconnections in the background
 ## 📖 Tutorial – Read Before Use
 - Disable or uninstall other ad-blocking modules, proxy tools, accessibility services, VPN ad blockers, browser ad blockers, ZN-Audit-Patch, Zygisk-Sui, etc.
 - If ads aren't blocked, try clearing the app’s cache and data, then restarting it

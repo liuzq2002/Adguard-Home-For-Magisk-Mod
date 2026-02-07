@@ -22,7 +22,6 @@ AGH_DIR="/data/adb/agh"
 BIN_DIR="$AGH_DIR/bin"
 SCRIPT_DIR="$AGH_DIR/scripts"
 BACKUP_DIR="$AGH_DIR/backup"
-PID_FILE="$BIN_DIR/agh_pid"
 PROXY_SCRIPT="$AGH_DIR/scripts/ProxyConfig.sh"
 
 i18n_print "- Extracting module files" "- 正在解压模块基本文件"
@@ -31,23 +30,21 @@ for file in uninstall.sh module.prop service.sh action.sh; do
 done
 
 # 检查并停止运行中的进程
+if [ -d "$AGH_DIR" ]; then
 i18n_print "- Stopping all AdGuard Home processes" "- 正在终止AdGuard Home进程"
-pkill -9 -f "AdGuardHome"
-[ -f "$PID_FILE" ] && rm -f "$PID_FILE"
-sleep 1
+pkill -9 "AdGuardHome"
+fi
 
 # 正在停止NoAdsService
 [ -f "$AGH_DIR/scripts/NoAdsService.sh" ] && {
     i18n_print "- Stopping NoAdsService process" "- 正在终止NoAdsService进程"
-    pkill -9 -f "NoAdsService"
-    sleep 1
+    pkill -9 "NoAdsService"
 }
 
 # 正在停止ProxyConfig
 [ -f "$AGH_DIR/scripts/ProxyConfig.sh" ] && {
     i18n_print "- Stopping ProxyConfig process" "- 正在终止ProxyConfig进程"
-    pkill -9 -f "ProxyConfig"
-    sleep 1
+    pkill -9 "ProxyConfig"
 }
 
 # 删除被锁定的残留文件
@@ -67,7 +64,10 @@ if [ -d "$AGH_DIR" ]; then
 fi
 
 # 清除旧模块残留
-rm -rf "$AGH_DIR/ifw" "$AGH_DIR/scripts"
+if [ -d "$AGH_DIR/ifw" ] || [ -d "$AGH_DIR/scripts" ] || [ -d "$BIN_DIR/agh_pid" ]; then
+  i18n_print "- Cleaning up old module residues" "- 正在清理旧模块残留"
+  rm -rf "$AGH_DIR/ifw" "$AGH_DIR/scripts" "$BIN_DIR/agh_pid"
+fi
 
 # 创建目录并解压文件
 mkdir -p "$AGH_DIR" "$BIN_DIR" "$SCRIPT_DIR" "$BACKUP_DIR"
@@ -79,4 +79,10 @@ find "$AGH_DIR" -type d -exec chmod 0700 {} \;
 chmod +x "$BIN_DIR/AdGuardHome" 
 chmod +x "$SCRIPT_DIR"/*.sh
 chown root:net_raw "$BIN_DIR/AdGuardHome"
+
+# 正在保留配置文件
+if [ -f "$BACKUP_DIR/config.prop" ]; then
+  i18n_print "- Preserving configuration file" "- 正在保留配置文件"
+  cp -f "$BACKUP_DIR/config.prop" "$SCRIPT_DIR/"
+fi
 i18n_print "- Installation complete. Reboot device." "- 安装完成，请重启设备。"

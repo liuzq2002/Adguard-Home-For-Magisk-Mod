@@ -24,8 +24,8 @@ while true; do
     content=$(printf '%s\n' \
       "id=AdGuardHome" \
       "name=AdGuard Home For Android" \
-      "version=20260101" \
-      "versionCode=2026010100" \
+      "version=20260206" \
+      "versionCode=2026020600" \
       "author=$AUTHOR" \
       "description=$DESC" \
       "updateJson=https://raw.githubusercontent.com/liuzq2002/Adguard-Home-For-Magisk-Mod/main/Update.json")

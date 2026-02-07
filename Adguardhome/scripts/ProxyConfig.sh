@@ -9,136 +9,87 @@ LOCAL_DNS="127.0.0.1:${redir_port}"
 # 在这里添加需要处理的配置文件
 # 格式: "配置文件路径|服务重启命令"
 PROXY_CONFIGS=(
-    # Surfing/Clash配置
     "/data/adb/box_bll/clash/*.yaml|/data/adb/box_bll/scripts/box.service restart"
-    # Box/Mihomo配置
     "/data/adb/box/mihomo/*.yaml|/data/adb/box/scripts/box.service restart"
-    # AkashaProxy/Clash配置
     "/data/clash/*.yaml|/data/clash/scripts/clash.service -k && /data/clash/scripts/clash.service -s"
 )
 
+# 提取共用section列表
+ALL_SECTIONS="direct-nameserver: proxy-server-nameserver: nameserver: default-nameserver: \"[Rr][Uu][Ll][Ee]-[Ss][Ee][Tt] \"[Gg][Ee][Oo][Ss][Ii][Tt][Ee] "
+
 # 重启服务并刷新网络
 restart_service() {
-    local service_cmd="$1"
-    $service_cmd
+    $1
     for s in 1 0; do
-        settings put global airplane_mode_on "$s"
+        settings put global airplane_mode_on $s
         am broadcast -a android.intent.action.AIRPLANE_MODE
     done
 }
 
 # 处理代理配置中的订阅
 process_proxy_url() {
-    local config_file="$1"
-    [ -z "$PROXY_URL" ] || [ ! -f "$config_file" ] && return 1
-    grep -q "$PROXY_URL" "$config_file" && return 1
-    sed -i "/proxy-providers:/,/url:/{s|url:.*|url: \"$PROXY_URL\"|}" "$config_file"
-    return 0
+    [ -z "$PROXY_URL" ] || [ ! -f "$1" ] && return 1
+    grep -q "$PROXY_URL" "$1" && return 1
+    sed -i "/proxy-providers:/,/url:/s|url:.*|url: \"$PROXY_URL\"|" "$1"
 }
 
-# 检查是否是标准情况
+# 检查是否是标准情况 
 is_standard_config() {
-    local config_file="$1"
-    [ ! -f "$config_file" ] && return 1
-    local sections="direct-nameserver: proxy-server-nameserver: nameserver: default-nameserver:"    
-    for section in $sections; do
-        if grep -q "^[[:space:]]*${section}" "$config_file"; then
-            local section_content=$(sed -n "/^[[:space:]]*${section}/,/^[[:space:]]*[^[:space:]#]/p" "$config_file")
-            local has_local_dns=$(echo "$section_content" | grep -c "^[[:space:]]*-[[:space:]]*$LOCAL_DNS")
-            local other_dns=$(echo "$section_content" | grep "^[[:space:]]*-[[:space:]]*[^#]" | grep -v "^[[:space:]]*-[[:space:]]*$LOCAL_DNS" | wc -l)
+    [ ! -f "$1" ] && return 1
+    for section in $ALL_SECTIONS; do
+        if grep -q "^[[:space:]]*${section}" "$1"; then
+            section_content=$(sed -n "/^[[:space:]]*${section}/,/^[^[:space:]#]/p" "$1")
+            has_local_dns=$(echo "$section_content" | grep -c "^[[:space:]]*-[[:space:]]*$LOCAL_DNS")
+            other_dns=$(echo "$section_content" | grep "^[[:space:]]*- " | grep -v "^[[:space:]]*- *#" | grep -v "$LOCAL_DNS" | wc -l)
+            commented_local_dns=$(echo "$section_content" | grep -c "^[[:space:]]*#.*-[[:space:]]*$LOCAL_DNS")
+            [ $commented_local_dns -gt 0 ] && return 1
             [ $has_local_dns -eq 0 ] || [ $other_dns -gt 0 ] && return 1
         fi
-    done    
+    done  
     return 0
 }
 
 # 清理配置文件中的旧DNS设置
 clean_config() {
-    local config_file="$1"
-    [ ! -f "$config_file" ] && return 1
-    sed -i '
-    /^[[:space:]]*direct-nameserver:/,/^[^[:space:]]/{/^[[:space:]]*#\{0,1\}[[:space:]]*-[[:space:]]*127\.0\.0\.1:[0-9][0-9]*$/d;s/^\([[:space:]]*\)#[[:space:]]*\(-[[:space:]]*[^#].*\)/\1\2/}
-    /^[[:space:]]*proxy-server-nameserver:/,/^[^[:space:]]/{/^[[:space:]]*#\{0,1\}[[:space:]]*-[[:space:]]*127\.0\.0\.1:[0-9][0-9]*$/d;s/^\([[:space:]]*\)#[[:space:]]*\(-[[:space:]]*[^#].*\)/\1\2/}
-    /^[[:space:]]*nameserver:/,/^[^[:space:]]/{/^[[:space:]]*#\{0,1\}[[:space:]]*-[[:space:]]*127\.0\.0\.1:[0-9][0-9]*$/d;s/^\([[:space:]]*\)#[[:space:]]*\(-[[:space:]]*[^#].*\)/\1\2/}
-    /^[[:space:]]*default-nameserver:/,/^[^[:space:]]/{/^[[:space:]]*#\{0,1\}[[:space:]]*-[[:space:]]*127\.0\.0\.1:[0-9][0-9]*$/d;s/^\([[:space:]]*\)#[[:space:]]*\(-[[:space:]]*[^#].*\)/\1\2/}
-    /^[[:space:]]*nameserver-policy:/,/^[^[:space:]]/{/^[[:space:]]*#\{0,1\}[[:space:]]*-[[:space:]]*127\.0\.0\.1:[0-9][0-9]*$/d;s/^\([[:space:]]*\)#[[:space:]]*\(-[[:space:]]*[^#].*\)/\1\2/}
-    /^[[:space:]]*\"[Rr][Uu][Ll][Ee]-[Ss][Ee][Tt]/,/^[^[:space:]]/{/^[[:space:]]*#\{0,1\}[[:space:]]*-[[:space:]]*127\.0\.0\.1:[0-9][0-9]*$/d;s/^\([[:space:]]*\)#[[:space:]]*\(-[[:space:]]*[^#].*\)/\1\2/}
-    ' "$config_file"
+    [ ! -f "$1" ] && return 1
+    for section in $ALL_SECTIONS; do
+        sed -i "/^[[:space:]]*${section}/,/^[^[:space:]]/{/^[[:space:]]*#\{0,1\}[[:space:]]*-[[:space:]]*127\.0\.0\.1:[0-9][0-9]*$/d;s/^\([[:space:]]*\)#[[:space:]]*\(-[[:space:]]*[^#].*\)/\1\2/}" "$1"
+    done
 }
 
 # 通用配置文件处理
 process_config() {
-    local config_file="$1"
-    [ ! -f "$config_file" ] && return 1
-    is_standard_config "$config_file"
-    if [ $? -eq 0 ]; then
-        return 1
-    fi
-    clean_config "$config_file"
-    sed -i "
-    /^[[:space:]]*direct-nameserver:/,/^[[:space:]]*[^[:space:]#]/{
-        /- $LOCAL_DNS/! s/^\\([[:space:]]*\\)\\(-[[:space:]]*[^#].*\\)/\\1# \\2/
-        /- $LOCAL_DNS/b
-        /^[[:space:]]*direct-nameserver:/{n; /- $LOCAL_DNS/!{
-            s/^\\([[:space:]]*\\)\\(-[[:space:]]*.*\\)/\\1- $LOCAL_DNS\\
-\\1# \\2/
-        }}
-    }
-    /^[[:space:]]*proxy-server-nameserver:/,/^[[:space:]]*[^[:space:]#]/{
-        /- $LOCAL_DNS/! s/^\\([[:space:]]*\\)\\(-[[:space:]]*[^#].*\\)/\\1# \\2/
-        /- $LOCAL_DNS/b
-        /^[[:space:]]*proxy-server-nameserver:/{n; /- $LOCAL_DNS/!{
-            s/^\\([[:space:]]*\\)\\(-[[:space:]]*.*\\)/\\1- $LOCAL_DNS\\
-\\1# \\2/
-        }}
-    }
-    /^[[:space:]]*nameserver:/,/^[[:space:]]*[^[:space:]#]/{
-        /- $LOCAL_DNS/! s/^\\([[:space:]]*\\)\\(-[[:space:]]*[^#].*\\)/\\1# \\2/
-        /- $LOCAL_DNS/b
-        /^[[:space:]]*nameserver:/{n; /- $LOCAL_DNS/!{
-            s/^\\([[:space:]]*\\)\\(-[[:space:]]*.*\\)/\\1- $LOCAL_DNS\\
-\\1# \\2/
-        }}
-    }
-    /^[[:space:]]*default-nameserver:/,/^[[:space:]]*[^[:space:]#]/{
-        /- $LOCAL_DNS/! s/^\\([[:space:]]*\\)\\(-[[:space:]]*[^#].*\\)/\\1# \\2/
-        /- $LOCAL_DNS/b
-        /^[[:space:]]*default-nameserver:/{n; /- $LOCAL_DNS/!{
-            s/^\\([[:space:]]*\\)\\(-[[:space:]]*.*\\)/\\1- $LOCAL_DNS\\
-\\1# \\2/
-        }}
-    }
-    /^[[:space:]]*\"[Rr][Uu][Ll][Ee]-[Ss][Ee][Tt]/,/^[[:space:]]*[^[:space:]#]/{
-        /- $LOCAL_DNS/! s/^\\([[:space:]]*\\)\\(-[[:space:]]*[^#].*\\)/\\1# \\2/
-        /- $LOCAL_DNS/b
-        /\"[Rr][Uu][Ll][Ee]-[Ss][Ee][Tt]/{n; /- $LOCAL_DNS/!{
-            s/^\\([[:space:]]*\\)\\(-[[:space:]]*.*\\)/\\1- $LOCAL_DNS\\
-\\1# \\2/
-        }}
-    }
-    /^[[:space:]]*\"[Gg][Ee][Oo][Ss][Ii][Tt][Ee]:[^\"]*\"[[:space:]]*:/,/^[[:space:]]*[^[:space:]#]/{
-        /- $LOCAL_DNS/! s/^\\([[:space:]]*\\)\\(-[[:space:]]*[^#].*\\)/\\1# \\2/
-        /- $LOCAL_DNS/b
-        /^[[:space:]]*\"[Gg][Ee][Oo][Ss][Ii][Tt][Ee]:[^\"]*\"[[:space:]]*:/{n; /- $LOCAL_DNS/!{
-            s/^\\([[:space:]]*\\)\\(-[[:space:]]*.*\\)/\\1- $LOCAL_DNS\\
-\\1# \\2/
-        }}
-    }
-    " "$config_file"   
-    grep -q "$LOCAL_DNS" "$config_file" && return 0 || return 1
+    [ ! -f "$1" ] && return 1
+    is_standard_config "$1" && return 1
+    clean_config "$1"
+    for section in $ALL_SECTIONS; do
+        sed -i "/^[[:space:]]*${section}/,/^[[:space:]]*[^[:space:]#-]/{/- $LOCAL_DNS/! s/^\\([[:space:]]*\\)\\(-[[:space:]]*[^#].*\\)/\\1# \\2/;/- $LOCAL_DNS/b;/^[[:space:]]*${section}/{n;:l;/^[[:space:]]*#*[[:space:]]*-/!{n;bl};/- $LOCAL_DNS/!{s/^\\([[:space:]]*\\)\\(#*[[:space:]]*-[[:space:]]*.*\\)/\\1- $LOCAL_DNS\\
+\\1# \\2/}}}" "$1"
+    done
+    grep -q "$LOCAL_DNS" "$1"
 }
 
 # 主函数
 i=0
 while :; do
     IFS='|' read -r config_file restart_cmd <<< "${PROXY_CONFIGS[$i]}"
-    process_proxy_url "$config_file"
-    res_sub=$?
-    process_config "$config_file"
-    res_dns=$?
-    if [ $res_sub -eq 0 ] || [ $res_dns -eq 0 ]; then
-        restart_service "$restart_cmd"
+    need_restart=0
+    for config_file in $config_file; do
+        [ ! -f "$config_file" ] && continue
+        [ "$1" = "--clean" ] && clean_config "$config_file" && continue
+        process_proxy_url "$config_file"
+        [ $? -eq 0 ] && need_restart=1
+        process_config "$config_file"
+        [ $? -eq 0 ] && need_restart=1
+    done
+    if [ "$1" = "--clean" ]; then
+        if [ $((i+1)) -eq ${#PROXY_CONFIGS[@]} ]; then
+            exit 0
+        fi
+        i=$((i+1))
+        continue
     fi
+    [ $need_restart -eq 1 ] && restart_service "$restart_cmd"
     i=$(( (i+1) % ${#PROXY_CONFIGS[@]} ))
     sleep 5
 done

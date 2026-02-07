@@ -2,11 +2,6 @@
 AGH_DIR="/data/adb/agh"
 . "$AGH_DIR/scripts/config.prop"
 
-# 错误日志设置
-ERROR_LOG="$AGH_DIR/agh.log"
-mkdir -p "$(dirname "$ERROR_LOG")"
-[ "$enable_logging" = true -o "$enable_logging" = 1 ] && exec 2>>"$ERROR_LOG"
-
 # DNS重定向规则
 case $1 in
 enable)

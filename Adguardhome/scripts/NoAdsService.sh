@@ -5,7 +5,7 @@ AGH_DIR="/data/adb/agh"
 [ $(pgrep -f "$0" | wc -l) -gt 1 ] && exit
 
 # 广告屏蔽核心函数
-block_ad(){ [ ! -e "$1" ]&&return;lsattr -d "$1"|grep -q "i.*$1"&&return;([ -d "$1" ]&&rm -rf "$1";[ -f "$1" ]&&> "$1";[ ! -e "$1" ]&&mkdir -p "$1")&&chattr +i "$1"; }
+block_ad(){ [ ! -e "$1" ]&&return;lsattr -d "$1"|grep -q "i.*$1"&&return;[ -d "$1" ]&&(rm -rf "$1"&&mkdir -p "$1")&&chattr +i "$1"&&return;[ -f "$1" ]&&> "$1"&&chattr +i "$1"; }
 
 # 执行循环
 while :;do
@@ -25,7 +25,6 @@ while :;do
     block_ad "/data/data/tv.danmaku.bili/files/splash2"
     block_ad "/data/data/com.cn21.ecloud/files/ecloud_current_screenad.obj"
     block_ad "/data/data/tv.danmaku.bili/files/splash_top_view"
-    block_ad "/data/data/tv.danmaku.bili/files/resmanager_resource_*"
     
     # 中国广电
     block_ad "/data/data/com.ai.obc.cbn.app/files/splashShow"
@@ -86,9 +85,6 @@ while :;do
     # 米游社
     block_ad "/data/media/0/Android/data/com.mihoyo.hyperion/cache/splash"
     
-    # 小米社区
-    block_ad "/data/data/com.xiaomi.vipaccount/files/mmkv/mmkv.default"
-    
     # 天翼云盘
     block_ad "/data/data/com.cn21.ecloud/files/ecloud_current_screenad.obj"
     
@@ -115,7 +111,19 @@ while :;do
     block_ad "/data/data/com.coocaa.familychat/app_e_qq_com_setting_7d767d052a5753acb54b111c8a40c128/sdkCloudSetting.cfg"
     
     # 堆糖广告
-    block_ad "/data/data/com.duitang.main/shared_prefs/ad_cache.xml"
+    block_ad "/data/data/com.duitang.main/shared_prefs/name.xml"
+    
+    # 同花顺App
+    block_ad "/data/data/com.hexin.plat.android/cache/splash_images"
+    
+    # 锦江荟App
+    block_ad "/data/data/com.plateno.botaoota/cache/image_manager_disk_cache"
+    
+    # 腾讯地图
+    block_ad "/data/data/com.tencent.map/databases/splash.db"
+    
+    # 4399游戏盒
+    block_ad "/data/data/com.m4399.gamecenter/shared_prefs/com.m4399.gamecenter.app.xml"
 
 # 自动关闭私人DNS
 settings get global private_dns_mode|grep -q off||settings put global private_dns_mode off

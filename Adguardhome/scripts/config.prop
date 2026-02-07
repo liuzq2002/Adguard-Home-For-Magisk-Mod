@@ -1,3 +1,4 @@
+#注：以下所有开关项修改后必须重启生效
 # 配置路径
 export PATH="/system/bin:/system/xbin:$PATH"
 

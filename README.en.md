@@ -2,6 +2,7 @@
 [简体中文](README.md) | **English** 
 - A universal Root manager with module system that blocks ads by redirecting and filtering DNS requests
 - Based on Twoone3's work, with added methods to disable ads by deleting/occupying ad folders
+- It achieves out-of-the-box ease of use; after flashing the module, you can use it by just following the tutorial for minor troubleshooting (no need to configure rules).
 - Built-in 8680 blocking rules with support for custom rules
 - Refactored almost all underlying scripts for lower latency, better performance, and power optimization
 - Please read the tutorial before requesting support. Click the link below to jump directly to the tutorial section: [Jump to Tutorial](https://github.com/liuzq2002/Adguard-Home-For-Magisk-Mod/blob/main/README.en.md#-tutorial--read-before-use)

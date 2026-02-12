@@ -1,6 +1,6 @@
 # Adguard Home For Android
 [简体中文](README.md) | **English** 
-- A universal Root manager with module system that blocks ads by redirecting and filtering DNS requests
+- Ad blocking via DNS request redirection/filtering is universal across modular Root managers
 - Based on Twoone3's work, with added methods to disable ads by deleting/occupying ad folders
 - It achieves out-of-the-box ease of use; after flashing the module, you can use it by just following the tutorial for minor troubleshooting (no need to configure rules).
 - Built-in 8680 blocking rules with support for custom rules

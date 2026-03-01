@@ -34,6 +34,13 @@
       ]
     },
     {
+  "repo_notes": [
+    {
+      "content": "The testing/ directory contains important test utilities and patterns that developers need to understand. The scripts/ directory has deployment and maintenance scripts that are crucial for operations."
+    }
+  ]
+    },
+    {
       "title": "Initial Configuration",
       "purpose": "Explain the out-of-box configuration, how to access the Web UI, and basic configuration options in config.prop",
       "parent": "Getting Started",

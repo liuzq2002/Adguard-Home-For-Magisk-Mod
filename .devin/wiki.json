@@ -1,1 +1,301 @@
-The content has been copied to your clipboard. Please paste it here to complete the file creation.
+{
+  "repo_notes": [
+    {
+      "content": ""
+    }
+  ],
+  "pages": [
+    {
+      "title": "Overview",
+      "purpose": "Introduce the AdGuard Home for Magisk module, explaining its purpose as a DNS-level ad blocker for Android devices, its key features (proxy compatibility, multi-layer blocking), and how it compares to alternative ad-blocking solutions",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Getting Started",
+      "purpose": "Guide users through initial setup, from prerequisites through first run and verification",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Installation",
+      "purpose": "Detail the installation process via Magisk Manager, including prerequisite checks, conflict detection, file extraction, and post-installation steps",
+      "parent": "Getting Started",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Initial Configuration",
+      "purpose": "Explain the out-of-box configuration, how to access the Web UI, and basic configuration options in config.prop",
+      "parent": "Getting Started",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Verifying Operation",
+      "purpose": "Describe how to verify that ad blocking is working, checking DNS redirection, reviewing logs, and achieving the target 96%+ block rate",
+      "parent": "Getting Started",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Core Components",
+      "purpose": "Document the three primary components that implement ad blocking functionality",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "AdGuard Home DNS Server",
+      "purpose": "Explain the AdGuard Home binary, its configuration in AdGuardHome.yaml, upstream DNS servers, DoH/DNSSEC support, caching, and the web management interface",
+      "parent": "Core Components",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Filter Rules System",
+      "purpose": "Document the 8680+ built-in filter rules, external filter lists (GOODBYEADS, URLHaus), whitelist filters, custom user rules, and the Adblock Plus 2.0 syntax including patterns, options, and stealth mode features",
+      "parent": "Core Components",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "DNS Redirection (iptables)",
+      "purpose": "Explain how iptables.sh creates the ADGUARD chain to redirect DNS traffic to AdGuard Home, IPv6 DNS blocking, and the enable/disable mechanisms",
+      "parent": "Core Components",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Auxiliary Services",
+      "purpose": "Document the three background services that provide additional functionality beyond core DNS filtering",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "File-Level Ad Blocking (NoAdsService)",
+      "purpose": "Explain how NoAdsService.sh targets 60+ applications, uses chattr +i to make ad directories immutable, disables Private DNS, clears Intent Firewall, and cleans up deleted app data",
+      "parent": "Auxiliary Services",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Proxy Integration (ProxyConfig)",
+      "purpose": "Document how ProxyConfig.sh automatically configures Surfing, Box, and AkashaProxy modules, updates LOCAL_DNS entries, manages proxy-providers URLs, and triggers service restarts",
+      "parent": "Auxiliary Services",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Metadata Management (ModuleMOD)",
+      "purpose": "Explain how ModuleMOD.sh monitors system locale, dynamically generates localized module metadata in English or Chinese, and updates module.prop",
+      "parent": "Auxiliary Services",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Configuration Reference",
+      "purpose": "Comprehensive reference documentation for all configuration files and parameters",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Module Configuration (config.prop)",
+      "purpose": "Document all config.prop parameters: adg_user, adg_group, redir_port, enable_iptables, block_ipv6_dns, enable_logging, and PROXY_URL",
+      "parent": "Configuration Reference",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "DNS Server Configuration (AdGuardHome.yaml)",
+      "purpose": "Document AdGuardHome.yaml structure: HTTP server settings, DNS server binding, upstream/fallback DNS, TLS configuration, query logging, statistics, filtering rules, and all available options",
+      "parent": "Configuration Reference",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Filter Rules Syntax",
+      "purpose": "Complete reference for Adblock Plus 2.0 filter syntax: patterns (wildcards, separators, anchors, regex), options (domain, type filters, stealth modes), exception rules, and examples",
+      "parent": "Configuration Reference",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Module Lifecycle",
+      "purpose": "Document the complete lifecycle from installation through updates to uninstallation",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Installation Process",
+      "purpose": "Detail the installation flow: update-binary execution, Magisk version check, customize.sh operations (conflict detection, service stopping, backup, extraction, permission setting)",
+      "parent": "Module Lifecycle",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Boot and Startup",
+      "purpose": "Explain the boot sequence: service.sh initialization, environment validation, AdGuard Home startup with verification/retry, auxiliary service launching, and log management",
+      "parent": "Module Lifecycle",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Update Mechanism",
+      "purpose": "Document the update system: Update.json structure, versionCode comparison, ghfast.top proxy, ZIP download, changelog display, and the update installation flow",
+      "parent": "Module Lifecycle",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Uninstallation",
+      "purpose": "Explain the uninstall process: service termination, proxy cleanup, locked file removal with chattr -i, and complete directory deletion",
+      "parent": "Module Lifecycle",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Advanced Topics",
+      "purpose": "Cover advanced usage scenarios and customization options",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Proxy Module Compatibility",
+      "purpose": "Detail integration with Surfing, Box, and AkashaProxy: automatic configuration via PROXY_URL, LOCAL_DNS insertion, service restart, and airplane mode toggling",
+      "parent": "Advanced Topics",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Creating Custom Filter Rules",
+      "purpose": "Guide for writing custom rules: pattern syntax, option usage, testing rules, performance considerations, and integration with AdGuardHome.yaml user_rules section",
+      "parent": "Advanced Topics",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Troubleshooting",
+      "purpose": "Common issues and solutions: conflicting modules, cache clearing, Clash Meta system proxy, ads still appearing, performance issues, and compatibility problems",
+      "parent": "Advanced Topics",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Performance Optimization",
+      "purpose": "Tips for optimizing performance: DNS cache tuning, upstream server selection, rule optimization, log management, and memory usage",
+      "parent": "Advanced Topics",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Architecture and Development",
+      "purpose": "Deep dive into system architecture for developers and advanced users",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "System Architecture",
+      "purpose": "Comprehensive architecture documentation: component diagram, data flow, service orchestration, configuration hierarchy, and design patterns",
+      "parent": "Architecture and Development",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Script Reference",
+      "purpose": "Technical reference for all scripts: customize.sh, service.sh, uninstall.sh, ModuleMOD.sh, NoAdsService.sh, ProxyConfig.sh, iptables.sh - including functions, variables, and execution flow",
+      "parent": "Architecture and Development",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    }
+  ]
+}

@@ -29,8 +29,10 @@ restart_service() {
 # 处理代理配置中的订阅
 process_proxy_url() {
     [ -z "$PROXY_URL" ] || [ ! -f "$1" ] && return 1
-    grep -q "$PROXY_URL" "$1" && return 1
-    sed -i "/proxy-providers:/,/url:/s|url:.*|url: \"$PROXY_URL\"|" "$1"
+    local m=0
+    grep -qF "$PROXY_URL" "$1" || { sed -i "/proxy-providers:/,/url:/s|url:.*|url: \"$PROXY_URL\"|" "$1" && m=1; }
+    grep -q "^[[:space:]]*dns:" "$1" && grep -q "^[[:space:]]*enhanced-mode:[[:space:]]*fake-ip" "$1" || { sed -i '/^[[:space:]]*dns:/,/^[^[:space:]]/s/^\([[:space:]]*enhanced-mode:\).*/\1 fake-ip/' "$1" && m=1; }
+    return $((1-m))
 }
 
 # 检查是否是标准情况 

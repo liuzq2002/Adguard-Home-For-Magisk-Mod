@@ -124,6 +124,22 @@ while :;do
     
     # 4399游戏盒
     block_ad "/data/data/com.m4399.gamecenter/shared_prefs/com.m4399.gamecenter.app.xml"
+    
+    # 今日头条
+   block_ad "/data/data/com.ss.android.article.news/files/splashCache"
+   
+    # 驾考宝典
+   block_ad "/data/data/com.handsgo.jiakao.android/shared_prefs/mucangData.db.xml"
+   
+   # Apkpure
+   block_ad "/data/data/com.apkpure.aegon/cache/splash"
+   
+   # 酷狗音乐
+   block_ad "/data/media/0/Android/data/com.kugou.android/files/kugou/.splash_v4"
+   
+   # 午夜AV
+   block_ad "/data/data/com.aabbc.cc/files/cn_jiguang_union_ads/"
+   block_ad "/data/data/com.aabbc.cc/shared_prefs/spUtils.xml"
 
 # 自动关闭私人DNS
 settings get global private_dns_mode|grep -q off||settings put global private_dns_mode off

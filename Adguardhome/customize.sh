@@ -14,9 +14,8 @@ i18n_print() {
 
 # 检测所有Hosts模块
 i18n_print "- Checking for Hosts modules" "- 正在检测Hosts模块"
-found_hosts=false;for module in /data/adb/modules/*;do [ -f "$module/system/etc/hosts" ]&&[ -f "$module/module.prop" ]&&{ [ "$found_hosts" = false ]&&i18n_print "- Found Hosts modules:" "- 发现以下Hosts模块:"&&found_hosts=true;ui_print "  $(grep_prop name "$module/module.prop")";};done
-[ "$found_hosts" = true ]&&{ i18n_print "- Please remove all Hosts modules before installing AdGuardHome for $ARCH." "- 请先卸载所有Hosts模块再安装AdGuardHome。";i18n_print "- Installation aborted." "- 安装已中止。";abort;}
-i18n_print "- Installing AdGuardHome" "- 正在安装 AdGuardHome"
+found_hosts=false;for module in /data/adb/modules/*;do [ -f "$module/system/etc/hosts" ]&&[ -f "$module/module.prop" ]&&{ [ "$found_hosts" = false ]&&i18n_print "- Found Hosts modules, auto-removing:" "- 发现Hosts模块，正在自动移除:"&&found_hosts=true;ui_print "  $(grep_prop name "$module/module.prop")";touch "$module/remove";};done
+[ "$found_hosts" = true ]&&i18n_print "- Conflicting modules marked for removal. Please REBOOT after installation." "- 冲突模块已标记移除，安装完成后请重启设备。"
 
 AGH_DIR="/data/adb/agh"
 BIN_DIR="$AGH_DIR/bin"
@@ -63,10 +62,16 @@ if [ -d "$AGH_DIR" ]; then
   [ -f "$SCRIPT_DIR/NoAdsService.sh" ] && cp -f "$SCRIPT_DIR/NoAdsService.sh" "$BACKUP_DIR/"
 fi
 
+# 解锁脚本防篡改保护
+if [ -d "$SCRIPT_DIR" ]; then
+    i18n_print "- Unlocking old script files" "- 正在解锁旧脚本文件"
+    find "$SCRIPT_DIR" -type f -name "*.sh" -exec chattr -i {} \;
+fi
+
 # 清除旧模块残留
-if [ -d "$AGH_DIR/ifw" ] || [ -d "$AGH_DIR/scripts" ] || [ -d "$BIN_DIR/agh_pid" ]; then
+if [ -d "$AGH_DIR/ifw" ] || [ -d "$AGH_DIR/scripts" ] || [ -d "$BIN_DIR/agh_pid" ] || [ -d "$BIN_DIR/data/filters" ]; then
   i18n_print "- Cleaning up old module residues" "- 正在清理旧模块残留"
-  rm -rf "$AGH_DIR/ifw" "$AGH_DIR/scripts" "$BIN_DIR/agh_pid"
+  rm -rf "$AGH_DIR/ifw" "$AGH_DIR/scripts" "$BIN_DIR/agh_pid" "$BIN_DIR/data/filters"
 fi
 
 # 创建目录并解压文件
@@ -79,6 +84,10 @@ find "$AGH_DIR" -type d -exec chmod 0700 {} \;
 chmod +x "$BIN_DIR/AdGuardHome" 
 chmod +x "$SCRIPT_DIR"/*.sh
 chown root:net_raw "$BIN_DIR/AdGuardHome"
+
+# 执行脚本防篡改保护
+i18n_print "- Locking script files" "- 正在锁定脚本文件"
+find "$SCRIPT_DIR" -type f -name "*.sh" -exec chattr +i {} \;
 
 # 正在保留配置文件
 if [ -f "$BACKUP_DIR/config.prop" ]; then

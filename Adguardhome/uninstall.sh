@@ -12,5 +12,8 @@ pkill -9 "ProxyConfig"
 # 解除锁定并删除残留文件
 grep 'block_ad' "$AGH_DIR/scripts/NoAdsService.sh"|grep -o '".*"'|tr -d '"'|while IFS= read -r p;do [ -n "$p" ]&&[ -e "$p" ]&&find "$p" \( -type f -o -type d \) |while IFS= read -r f;do if [ -d "$f" ];then lsattr -d "$f"|grep -q "i-"&&{ chattr -i "$f";rmdir "$f";};else lsattr "$f"|grep -q "i-"&&{ chattr -i "$f";rm -f "$f";};fi;done;done
 
+# 解除脚本防篡改保护
+find "$AGH_DIR/scripts" -type f -name "*.sh" -exec chattr -i {} \;
+
 # 删除AGH主目录
 [ -d "/data/adb/agh" ] && rm -rf "/data/adb/agh"

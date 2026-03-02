@@ -7,6 +7,7 @@
 - Refactored almost all underlying scripts for lower latency, better performance, and power optimization
 - Please read the tutorial before requesting support. Click the link below to jump directly to the tutorial section: [Jump to Tutorial](https://github.com/liuzq2002/Adguard-Home-For-Magisk-Mod/blob/main/README.en.md#-tutorial--read-before-use)
 ## ⚠️ Risk Notice – Please Read
+- Users who have updated to version 2026.03.01 must not downgrade to an earlier version, as doing so may leave residual files when uninstalling modules.
 - May interfere with coupon redemption functionality in some apps (not a false positive)
 - May prevent reward systems based on watching ads (not a false positive)
 - Do **not** use with other similar ad-blocking modules

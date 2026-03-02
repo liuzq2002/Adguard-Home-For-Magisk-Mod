@@ -35,7 +35,7 @@
 2. No need to worry about disconnections in the background
 ## 📖 Tutorial – Read Before Use
 - Disable or uninstall other ad-blocking modules, proxy tools, accessibility services, VPN ad blockers, browser ad blockers, ZN-Audit-Patch, Zygisk-Sui, etc.
-- If ads aren't blocked, try clearing the app’s cache and data, then restarting it
+- If the ad cannot be blocked, clear all data for the app and try again.
 - Magisk users: Click the gear icon next to the module to access the Web UI manager
 - If using Clash Meta, disable system proxy in Network settings (tested and working)
 - USTC Speedtest: [Jump to Tutorial](https://test.ustc.edu.cn)

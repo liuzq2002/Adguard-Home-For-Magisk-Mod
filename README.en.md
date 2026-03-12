@@ -39,7 +39,7 @@
 - Magisk users: Click the gear icon next to the module to access the Web UI manager
 - If using Clash Meta, disable system proxy in Network settings (tested and working)
 - USTC Speedtest: [Jump to Tutorial](https://test.ustc.edu.cn)
-- Ad block test (aim for ≥96%): [Jump to Tutorial](https://paileactivist.github.io/toolz/adblock.html)
+- Test if ad blocking is working properly (aim for ≥96%): [Jump to Tutorial](https://paileactivist.github.io/toolz/adblock.html)
 ## 🙏 Credits
 - [AdguardHome_magisk](https://github.com/410154425/AdGuardHome_magisk)
 - [akashaProxy](https://github.com/ModuleList/akashaProxy)

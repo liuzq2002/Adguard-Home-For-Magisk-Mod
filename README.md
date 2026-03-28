@@ -41,10 +41,8 @@
 - 一定要关闭或卸载其他广告拦截模块、无障碍跳过软件、VPN代理去广告、浏览器自带广告拦截等等
 - 遇到广告拦截不掉的话清除该应用的全部数据后重试
 - 如果你使用的是Magisk框架，那么点击模块旁边的操作按钮就可以进入Web UI管理器
-- 代理软件教程：
-使用Chash Meta导致无法正常过滤的，可以去Chash Meta设置-网络中关闭系统代理
-- 代理模块教程：
-在/data/adb/agh/scripts/config.prop中填入你的机场订阅保存重启即可自动兼容代理模块，剩下的交给模块自行处理就行
+- 代理软件教程：使用Chash Meta导致无法正常过滤的，可以去Chash Meta设置-网络中关闭系统代理
+- 代理模块教程：在/data/adb/agh/scripts/config.prop中填入你的机场订阅保存重启即可自动兼容代理模块，剩下的交给模块自行处理就行
 - 中国科学大学测速网：[点击跳转](https://test.ustc.edu.cn)
 - 测试广告拦截是否正常（达到96%或以上是正常）：[点击跳转](https://paileactivist.github.io/toolz/adblock.html)
 ## 💬 获取联系方式

@@ -1,2 +1,1 @@
-- 紧急修复了安装和卸载的相关问题（请Root执行临时卸载脚本后重新安装，必须执行下面链接中单独的卸载脚本）
-- 临时卸载脚本：https://github.com/liuzq2002/Adguard-Home-For-Magisk-Mod/releases/download/2026.03.30/Uninstall.sh
+- 紧急修复了安装和卸载的相关问题（已将临时卸载脚本方法整合，不需要单独执行脚本了）

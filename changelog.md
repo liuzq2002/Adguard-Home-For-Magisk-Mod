@@ -1,3 +1,5 @@
-- 紧急修复了安装和卸载的相关问题（请
-Root执行临时卸载脚本后重新安装，必须执行下面链接中单独的卸载脚本）
-- 临时卸载脚本：https://github.com/liuzq2002/Adguard-Home-For-Magisk-Mod/releases/download/2026.03.31/Uninstall.sh
+- 新增适配人卫App、盒马App、完美世界电竞
+- 优化了小米移动、搜狗输入法、手心输入法、淘宝联盟App、淘宝闪购e起赚小程序的误杀
+- 修复了ProxyConfig中代理模块订阅链接的解析Bug以及黑白名单的问题
+- 更新AdguardHome过滤内核版本为v0.107.74
+- 防篡改功能临时回退以解决KernelSU系列上的问题（可以直接更新，已经过群友测试）

@@ -23,7 +23,6 @@ while :;do
     block_ad "/data/data/tv.danmaku.bili/files/update"
     block_ad "/data/media/0/Android/data/tv.danmaku.bili/cache/default/journal"
     block_ad "/data/data/tv.danmaku.bili/files/splash2"
-    block_ad "/data/data/com.cn21.ecloud/files/ecloud_current_screenad.obj"
     block_ad "/data/data/tv.danmaku.bili/files/splash_top_view"
     
     # 中国广电
@@ -33,6 +32,7 @@ while :;do
     block_ad "/data/media/0/Android/data/cn.kuwo.player/files/KuwoMusic/.screenad"
     block_ad "/data/data/cn.kuwo.player/app_adnet"
     block_ad "/data/media/0/Android/data/cn.kuwo.player/files/KuwoMusic/.ad"
+    block_ad "/data/media/0/Android/data/cn.kuwo.kwmusichd/files/KwPlayerHD/.screenad"
     
     # 网易云音乐
     block_ad "/data/media/0/Android/data/com.netease.cloudmusic/cache/Ad"
@@ -140,7 +140,51 @@ while :;do
    # 午夜AV
    block_ad "/data/data/com.aabbc.cc/files/cn_jiguang_union_ads/"
    block_ad "/data/data/com.aabbc.cc/shared_prefs/spUtils.xml"
+   
+   # 掌上无畏契约
+   block_ad "/data/media/0/Android/data/com.tencent.apps.valorant/cache/splash"
 
+   # WakeUp课程表
+   block_ad "/data/data/com.suda.yzune.wakeupschedule/shared_prefs/com.baidu.homework.Preference.FastAdPreference.xml"
+   block_ad "/data/data/com.suda.yzune.wakeupschedule/shared_prefs/mobads_aplist_status_new.xml"
+   
+   # 猫眼APP
+   block_ad "/data/media/0/Android/data/com.sankuai.movie/cache/maoyan_downlaod"
+   block_ad "/data/data/com.sankuai.movie/cache/cips/common/mtplatform_mtpicasso/assets/image_manager_disk_cache"
+   
+   # 心悦俱乐部
+   block_ad "/data/data/com.tencent.tgclub/cache/image_manager_disk_cache"
+   
+   # 瓜子二手车
+   block_ad "/data/data/com.ganji.android.haoche_c/files/guazi_theme_image"
+   
+   # 小象超市
+   block_ad "/data/media/0/Android/data/com.meituan.retail.v.android/files/cips/common/waimai"
+   block_ad "/data/data/com.meituan.retail.v.android/cache/cips/common/mtplatform_mtpicasso/assets/image_manager_disk_cache"
+   
+   # 中信银行
+   block_ad "/data/data/com.ecitic.bank.mobile/files/citic/advs"
+   
+   # 江苏银行
+   block_ad "/data/data/cn.jsb.china/cache/images"
+   block_ad "/data/data/cn.jsb.china/files/jsbank/splash"  
+   
+   # 滴滴出行
+   block_ad "/data/data/com.sdu.didi.psnger/cache/image_manager_disk_cache"
+   
+   # 盒马App
+   block_ad "/data/data/com.wudaokou.hippo/shared_prefs/splash.xml"
+   
+   # 完美世界电竞
+   block_ad "/data/data/com.pwrd.steam.esports/shared_prefs/advertisement_sp_name.xml"
+   
+   # 人卫App
+   block_ad "/data/data/com.pmph.irenwei/cache/image_manager_disk_cache"
+   block_ad "/data/data/com.pmph.irenwei/files/ad.gif"
+   
+   # 中国银河证券
+   block_ad "/data/data/com.galaxy.stock/files"
+   
 # 自动关闭私人DNS
 settings get global private_dns_mode|grep -q off||settings put global private_dns_mode off
 

@@ -2,8 +2,9 @@
 SKIPUNZIP=1
 
 # 多语言检测
-locale=$( (getprop persist.sys.locale || getprop ro.product.locale || getprop ro.product.locale.language || getprop persist.sys.language) | tr '[:upper:]' '[:lower:]')
-ui_print "- 当前语言设置: ${locale:-未检测到}"
+locale=$(getprop persist.sys.locale | tr '[:upper:]' '[:lower:]')
+[ -z "$locale" ] && locale="zh"
+ui_print "- $locale"
 case $locale in
   en*) language=en ;;
   *)   language=zh ;;
@@ -15,18 +16,25 @@ i18n_print() {
 # 检测所有Hosts模块
 i18n_print "- Checking for Hosts modules" "- 正在检测Hosts模块"
 found_hosts=false;for module in /data/adb/modules/*;do [ -f "$module/system/etc/hosts" ]&&[ -f "$module/module.prop" ]&&{ [ "$found_hosts" = false ]&&i18n_print "- Found Hosts modules, auto-removing:" "- 发现Hosts模块，正在自动移除:"&&found_hosts=true;ui_print "  $(grep_prop name "$module/module.prop")";touch "$module/remove";};done
-[ "$found_hosts" = true ]&&i18n_print "- Conflicting modules marked for removal. Please REBOOT after installation." "- 冲突模块已标记移除，安装完成后请重启设备。"
+[ "$found_hosts" = true ]&&i18n_print "- Conflicting modules have been marked for removal. Please reboot after installation." "- 冲突模块已标记移除，安装完成后请重启设备。"
 
 AGH_DIR="/data/adb/agh"
 BIN_DIR="$AGH_DIR/bin"
 SCRIPT_DIR="$AGH_DIR/scripts"
 BACKUP_DIR="$AGH_DIR/backup"
+ADGPATH="/data/adb/modules/AdGuardHome"
 PROXY_SCRIPT="$AGH_DIR/scripts/ProxyConfig.sh"
 
-i18n_print "- Extracting module files" "- 正在解压模块基本文件"
+i18n_print "- Extracting basic module files" "- 正在解压模块基本文件"
 for file in uninstall.sh module.prop service.sh action.sh; do
   unzip -o "$ZIPFILE" "$file" -d "$MODPATH"
 done
+
+# 正在停止ProxyConfig
+[ -f "$AGH_DIR/scripts/ProxyConfig.sh" ] && {
+    i18n_print "- Stopping ProxyConfig process" "- 正在终止ProxyConfig进程"
+    pkill -9 "ProxyConfig"
+}
 
 # 检查并停止运行中的进程
 if [ -d "$AGH_DIR" ]; then
@@ -50,7 +58,7 @@ fi
 [ -f "$AGH_DIR/scripts/NoAdsService.sh" ] && {
     i18n_print "- Removing locked residual files" "- 正在删除被锁定的残留文件"
     local c=0 u=0 p;while IFS= read -r p;do [ -n "$p" ]&&[ -e "$p" ]&&while IFS= read -r f;do c=$((c+1));if [ -d "$f" ];then lsattr -d "$f" |grep -q "i-"&&{ chattr -i "$f";rmdir "$f"&&u=$((u+1));} else lsattr "$f" |grep -q "i-"&&{ chattr -i "$f";rm -f "$f";u=$((u+1));};fi;done< <(find "$p" \( -type f -o -type d \));done< <(grep 'block_ad' "$AGH_DIR/scripts/NoAdsService.sh"|grep -o '".*"'|tr -d '"')
-    i18n_print "- Removed $u locked files from $c scanned" "- 从 $c 个文件中删除了 $u 个锁定文件"
+    i18n_print "- Removed $u locked files out of $c scanned items" "- 从 $c 个文件中删除了 $u 个锁定文件"
 }
 
 # 检查是否首次安装
@@ -65,7 +73,7 @@ fi
 # 解锁脚本防篡改保护
 if [ -d "$SCRIPT_DIR" ]; then
     i18n_print "- Unlocking old script files" "- 正在解锁旧脚本文件"
-    find "$SCRIPT_DIR" -type f -name "*.sh" -exec chattr -i {} \;
+    find "$AGH_DIR/scripts" "$ADGPATH" -type f -name "*.sh" -exec chattr -i {} \;
 fi
 
 # 清除旧模块残留

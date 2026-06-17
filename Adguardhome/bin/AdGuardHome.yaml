@@ -2,6 +2,13 @@ http:
   pprof:
     port: 6060
     enabled: false
+  doh:
+    routes:
+      - GET /dns-query
+      - POST /dns-query
+      - GET /dns-query/{ClientID}
+      - POST /dns-query/{ClientID}
+    insecure_enabled: false
   address: 127.0.0.1:3000
   session_ttl: 720h
 users:
@@ -23,8 +30,8 @@ dns:
   ratelimit_whitelist: []
   refuse_any: true
   upstream_dns:
-    - https://223.6.6.6/dns-query
-    - https://223.5.5.5/dns-query
+    - https://1.12.12.12/dns-query
+    - https://120.53.53.53/dns-query
   upstream_dns_file: ""
   bootstrap_dns:
     - 180.184.1.1
@@ -32,8 +39,8 @@ dns:
     - 2400:7fc0:849e:200::4
     - 2404:c2c0:85d8:901::4
   fallback_dns:
-    - https://1.12.12.12/dns-query
-    - https://120.53.53.53/dns-query
+    - https://doh-pure.onedns.net/dns-query
+    - https://dns.quad9.net/dns-query
   upstream_mode: load_balance
   fastest_timeout: 1s
   allowed_clients: []
@@ -85,7 +92,6 @@ tls:
   port_dns_over_quic: 784
   port_dnscrypt: 0
   dnscrypt_config_file: ""
-  allow_unencrypted_doh: false
   certificate_chain: ""
   private_key: ""
   certificate_path: ""
@@ -207,7 +213,6 @@ user_rules:
   - '||zzhc.vnet.cn^$important'
   - '||sentry.io^$importantnt'
   - '||api.umengcn.org^$important'
-  - '||developer.xiaomi.com^$important'
   - '@@||iyfbodn.com^$important'
   - '||update.googleapis.com^$important'
   - '||browser.sentry-cdn.com^$important'
@@ -260,7 +265,6 @@ user_rules:
   - '||hx3m5vq.com^$important'
   - '||ce2b8dz.com^$important'
   - '||yimzoo36.com^$important'
-  - '||juejin.cn^$important'
   - '||chunyina.co^$important'
   - '||weiyaonuo.co^$important'
   - '||yopengtong.co^$important'
@@ -878,7 +882,6 @@ user_rules:
   - '||uril6.com^$important'
   - '||yuanbaobaoxian.com^$important'
   - '||adim.pinduoduo.com^$important'
-  - '||ahdohpiechei.com^$important'
   - '||cjjd14.com^$important'
   - '||lf-reward-video.bytedcdn.com^$important'
   - '||homeborn.cn^$important'
@@ -944,14 +947,13 @@ user_rules:
   - '||docs.c-ctrip.com^$important'
   - '||download*.ctrip.com^$important'
   - '#针对美团/美团外卖广告拦截规则'
-  - '||dreport.meituan.net^$important'
+  - '||catfront.dianping.com^$important'
   - '||data-sdk-uuid-log.d.meituan.net^$important'
   - '||tec73.com^$important'
   - '||wmlog.meituan.com^$important'
   - '||volces.com^$important'
   - '||logan.sankuai.com^$important'
   - '||appsflyersdk.com^$important'
-  - '||catfront.dianping.com^$important'
   - '||alita.waimai.meituan.com^$important'
   - '@@||mrn.meituan.net^$important'
   - '@@||i.meituan.com^$important'
@@ -991,6 +993,9 @@ user_rules:
   - '||atrace.chelaile.net.cn^$important'
   - '||cdn.smartimg.chelaile.net.cn^$important'
   - '#针对部分小众广告联盟的规则'
+  - '||adn.tapapis.cn^$important'
+  - '||yourongsj.com^$important'
+  - '||halomobi.com^$important'
   - '||uodoo.com^$important'
   - '||lianliyuntools.com^$important'
   - '||camerascanner.cn^$important'
@@ -1085,7 +1090,6 @@ user_rules:
   - '||ffilelogapp.huya.com^$important'
   - '||fileserverpcdn.cdn.huya.com^$important'
   - '||*-fileserverpcdn.cdn.huya^$important'
-  - '||gameresource.itop.qq.com^$important'
   - '||*-cdnfile*pcdn.msstatic.com^$important'
   - '||hydlpcdn.cdn.huya.com^$important'
   - '#中国移动云盘的广告拦截规则'
@@ -1114,9 +1118,17 @@ user_rules:
   - '@@||shouji.sogou.com^$important'
   - '#针对小蚕惠生活的拦截规则'
   - '||buryingapi.xiaocantech.com^$important'
-  - '#针对虎扑JRS的广告拦截规则'
+  - '#针对虎扑App的广告拦截规则'
   - '||goblin.hupu.com^$important'
   - '||e-goblin.hupu.com^$important'
+  - '||hermes.hupu.com^$important'
+  - '||gdc.hupucdn.com^$important'
+  - '||collect.hupu.com^$important'
+  - '||nur.hupu.com^$important'
+  - '||hss.hupu.com^$important'
+  - '||downloadmobile.hupu.com^$important'
+  - '||themis.hupu.com^$important'
+  - '||activity-static.hoopchina.com.cn^$important'
   - '#针对魅族手机的广告拦截规则'
   - '||open-iflow.meizu.com^$important'
   - '||reader.meizu.com^$important'
@@ -1125,7 +1137,6 @@ user_rules:
   - '||api-flow.flyme.cn^$important'
   - '#针对翼支付的广告拦截规则'
   - '||mdc.bestpay.com.cn^$important'
-  - '||mapi.bestpay.com.cn^$important'
   - '#针对小米互联互通的放行规则'
   - '@@||hpplay.cn^$important'
   - '#针对哔咔漫画的广告拦截规则'
@@ -1259,7 +1270,7 @@ user_rules:
   - '@@||tnc3-alisc1.snssdk.com^$important'
   - '@@||content-open.douyin.com^$important'
   - '#针对KiMiAPP的误杀放行规则'
-  - '@@||prod-chat-kimi.tos-cn-beijing.volces.com^$importat'
+  - '@@||prod-chat-kimi.tos-cn-beijing.volces.com^$important'
   - '#针对度小满/有钱花的广告拦截规则'
   - '||plusjrmallstatic.cdn.bcebos.com^$important'
   - '#针对UC/夸克网盘的误杀放行规则'
@@ -1326,6 +1337,31 @@ user_rules:
   - '#针对彩虹多多App的广告拦截规则'
   - '||yunxish.com^$important'
   - '||adxvip.com^$important'
+  - '#针对闲鱼App的误杀放行规则'
+  - '@@||px.ucweb.com^$important'
+  - '#针对百词斩App的广告拦截规则'
+  - '||advertise.bczeducation.*^$important'
+  - '#针对努比亚游戏中心广告拦截规则'
+  - '||cdn*-ads.redmagic.com^$important'
+  - '#针对滴滴出行车主服务误杀放行规则'
+  - '@@||adtrack.xiaojukeji.com^$important'
+  - '#针对小米移动的误杀放行规则'
+  - '@@||apm-rum.inf.miui.com^$important'
+  - '@@||tracking.miui.com^$important'
+  - '#针对搜狗输入法的误杀放行规则'
+  - '@@input.shouji.sogou.com^$important'
+  - '#针对手心输入法的误杀放行规则'
+  - '@@shouji.360.cn^$important'
+  - '#针对淘宝联盟App的误杀放行规则'
+  - '@@||audid-api.taobao.com^$important'
+  - '#淘宝闪购e起赚小程序误杀放行规则'
+  - '@@||shopping.ele.me^$important'
+  - '#针对顺丰同城骑士的误杀放行规则'
+  - '@@||locprivate-tostc.sf-express.com^$important'
+  - '#中山市智慧排水平台误杀放行规则'
+  - '@@||zsusw.zs.gdgov.cn^$important'
+  - '#针对中国电信的误杀放行规则'
+  - '@@||mapi.bestpay.com.cn^$important'
 dhcp:
   enabled: false
   interface_name: ""
@@ -1398,4 +1434,4 @@ os:
   group: ""
   user: ""
   rlimit_nofile: 0
-schema_version: 33
+schema_version: 34

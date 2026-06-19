@@ -3,7 +3,7 @@
 - Ad blocking via DNS request redirection/filtering is universal across modular Root managers
 - It achieves out-of-the-box ease of use; after flashing the module, you can use it by just following the tutorial for minor troubleshooting (no need to configure rules)
 - Built-in GOODBYEADS blocking rules and adds custom rules on top of them
-- Refactored almost all underlying scripts for lower latency, better performance, and power optimization
+- This project aims to replace traditional Hosts and deliver a better modern experience — with zero ad leakage, high performance, and strong stealth
 - Please read the tutorial before requesting support. Click the link below to jump directly to the tutorial section: [Jump to Tutorial](https://github.com/liuzq2002/Adguard-Home-For-Magisk-Mod/blob/main/README.en.md#-tutorial--read-before-use)
 ## ⚠️ Risk Notice – Please Read
 - Users who have updated to version 2026.03.01 must not downgrade to an earlier version, as doing so may leave residual files when uninstalling modules.

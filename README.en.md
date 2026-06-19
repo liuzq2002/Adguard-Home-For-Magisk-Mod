@@ -19,7 +19,7 @@
 ### vs. Hosts File
 1. Encrypted DNS (DoH) support
 2. Prevents DNS hijacking
-3. Harder to detect and block
+3. Harder to detect and block, Because the loopback address returned by Hosts is itself a detectable signature
 4. No need to flash the meta module, achieving even better concealment
 ### vs. Accessibility-based Ad Skippers (e.g., Li Tiao Tiao)
 1. No background process killing issues

@@ -1,4 +1,6 @@
 # Adguard Home For Android
+<a href="https://deepwiki.com/liuzq2002/Adguard-Home-For-Magisk-Mod"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
+
 [简体中文](README.md) | **English** 
 - Ad blocking via DNS request redirection/filtering is universal across modular Root managers
 - This project is permanently open-source and free without donations or its variants, and does not differentiate versions based on whether a donation is made

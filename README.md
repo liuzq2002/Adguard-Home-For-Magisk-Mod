@@ -1,4 +1,6 @@
 # Adguard Home For Android
+<a href="https://deepwiki.com/liuzq2002/Adguard-Home-For-Magisk-Mod"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
+
  **简体中文** | [English](README.en.md)
 - 通过重定向过滤DNS请求屏蔽广告且带有模块系统的Root管理器通用
 - 本项目永久开源免费无捐赠及其变种，不以是否捐赠来区分版本

@@ -64,4 +64,4 @@ fi
 find "$ADGPATH" -type f -name "*.sh" -exec chattr +i {} \;
 
 # 日志超限时清空
-[ $(stat -c %s "$MAIN_LOG" || ls -l "$MAIN_LOG" | awk '{print $5}') -ge 102400 ] && : > "$MAIN_LOG"
+[ "$(wc -c < "$MAIN_LOG")" -ge 102400 ] && : > "$MAIN_LOG"

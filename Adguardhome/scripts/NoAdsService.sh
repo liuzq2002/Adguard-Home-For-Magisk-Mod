@@ -17,7 +17,7 @@ while :;do
     
     # 知乎App
     block_ad "/data/data/com.zhihu.android/files/ad"
-    
+
     # 哔哩哔哩
     block_ad "/data/data/tv.danmaku.bili/files/res_cache"
     block_ad "/data/data/tv.danmaku.bili/files/update"
@@ -198,6 +198,10 @@ while :;do
    # 中国移动云盘
    block_ad "/data/media/0/Android/data/com.chinamobile.mcloud/files/M_Cloud/temp/bigcloudimage"
    block_ad "/data/media/0/Android/data/com.chinamobile.mcloud/files/boot_logo"
+
+   # Coolapk
+    block_ad "/data/data/com.coolapk.market/app_adnet/"
+    
 
 # 自动关闭私人DNS
 [ "$(settings get global private_dns_mode)" = "off" ] || settings put global private_dns_mode off

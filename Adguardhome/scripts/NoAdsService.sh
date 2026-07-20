@@ -24,13 +24,15 @@ while :;do
     block_ad "/data/media/0/Android/data/tv.danmaku.bili/cache/default/journal"
     block_ad "/data/data/tv.danmaku.bili/files/splash2"
     block_ad "/data/data/tv.danmaku.bili/files/splash_top_view"
+    block_ad "/data/data/tv.danmaku.bili/files/resmanager_resource_1"
+    block_ad "/data/data/tv.danmaku.bili/files/resmanager_resource_2"
+    block_ad "/data/data/tv.danmaku.bili/files/resmanager_resource_3"
     
     # 中国广电
     block_ad "/data/data/com.ai.obc.cbn.app/files/splashShow"
     
     # 酷我音乐
     block_ad "/data/media/0/Android/data/cn.kuwo.player/files/KuwoMusic/.screenad"
-    block_ad "/data/data/cn.kuwo.player/app_adnet"
     block_ad "/data/media/0/Android/data/cn.kuwo.player/files/KuwoMusic/.ad"
     block_ad "/data/media/0/Android/data/cn.kuwo.kwmusichd/files/KwPlayerHD/.screenad"
     
@@ -185,8 +187,20 @@ while :;do
    # 中国银河证券
    block_ad "/data/data/com.galaxy.stock/files"
    
+   # 南方基金
+   block_ad "/data/media/0/Android/data/com.nanfangjijin.app/files/ad"
+   block_ad "/data/data/com.nanfangjijin.app/cache/image_manager_disk_cache"
+   
+   # 银华利生宝
+   block_ad "/data/data/com.ihandy.fund/cache/image_manager_disk_cache"
+   block_ad "/data/media/0/Android/data/com.ihandy.fund/cache/download/splash"
+   
+   # 中国移动云盘
+   block_ad "/data/media/0/Android/data/com.chinamobile.mcloud/files/M_Cloud/temp/bigcloudimage"
+   block_ad "/data/media/0/Android/data/com.chinamobile.mcloud/files/boot_logo"
+
 # 自动关闭私人DNS
-settings get global private_dns_mode|grep -q off||settings put global private_dns_mode off
+[ "$(settings get global private_dns_mode)" = "off" ] || settings put global private_dns_mode off
 
 # 自动清空IFW文件夹
 [ -d "/data/system/ifw" ]&&for f in /data/system/ifw/*;do [ -e "$f" ]&&rm -rf /data/system/ifw/*&&break;done

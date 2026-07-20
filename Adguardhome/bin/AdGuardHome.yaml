@@ -1,6 +1,6 @@
 http:
   pprof:
-    port: 6060
+    port: 62761
     enabled: false
   doh:
     routes:
@@ -9,8 +9,8 @@ http:
       - GET /dns-query/{ClientID}
       - POST /dns-query/{ClientID}
     insecure_enabled: false
-  address: 127.0.0.1:3000
-  session_ttl: 720h
+  address: 127.0.0.1:40165
+  session_ttl: 30d
 users:
   - name: root
     password: $2a$10$zHcQbG4nXIzPB/Cj5M9lQ.qbQH/EZAT2wakz/sK1.b/d4ey2oqUd2
@@ -22,7 +22,7 @@ theme: auto
 dns:
   bind_hosts:
     - 127.0.0.1
-  port: 5591
+  port: 62761
   anonymize_client_ip: false
   ratelimit: 0
   ratelimit_subnet_len_ipv4: 24
@@ -40,7 +40,7 @@ dns:
     - 2404:c2c0:85d8:901::4
   fallback_dns:
     - https://doh-pure.onedns.net/dns-query
-    - https://dns.quad9.net/dns-query
+    - https://doh.360.cn/dns-query
   upstream_mode: load_balance
   fastest_timeout: 1s
   allowed_clients: []
@@ -100,7 +100,7 @@ tls:
 querylog:
   dir_path: ""
   ignored: []
-  interval: 24h
+  interval: 1d
   size_memory: 1000
   enabled: true
   ignored_enabled: false
@@ -108,7 +108,7 @@ querylog:
 statistics:
   dir_path: ""
   ignored: []
-  interval: 24h
+  interval: 1d
   enabled: true
   ignored_enabled: false
 filters:
@@ -377,7 +377,6 @@ user_rules:
   - '||longlingsc.art^$important'
   - '||qhj0u.com^$important'
   - '||wedbccid.top^$important'
-  - '||qbb6.com^$important'
   - '||xbfxs6.com^$important'
   - '||noi107.com^$important'
   - '||tquzifwb.com^$important'
@@ -854,10 +853,8 @@ user_rules:
   - '||nstool.netease.com^$important'
   - '||ssp-landing.taptap.cn^$important'
   - '||site.u-mob.cn^$important'
-  - '||mos.m.taobao.com^$important'
   - '||pages-fast.m.taobao.com^$important'
   - '||pages.goofish.com^$important'
-  - '||mo.m.taobao.com^$important'
   - '||lp.pinduoduo.com^$important'
   - '||i.meituan.com^$important'
   - '||conf-darwin.xycdn.com^$important'
@@ -993,6 +990,9 @@ user_rules:
   - '||atrace.chelaile.net.cn^$important'
   - '||cdn.smartimg.chelaile.net.cn^$important'
   - '#针对部分小众广告联盟的规则'
+  - '||lf*-data.volccdn.com^$important'
+  - '||irs03.com^$important'
+  - '||lighthouseapi3.dmall.com^$important'
   - '||adn.tapapis.cn^$important'
   - '||yourongsj.com^$important'
   - '||halomobi.com^$important'
@@ -1092,9 +1092,6 @@ user_rules:
   - '||*-fileserverpcdn.cdn.huya^$important'
   - '||*-cdnfile*pcdn.msstatic.com^$important'
   - '||hydlpcdn.cdn.huya.com^$important'
-  - '#中国移动云盘的广告拦截规则'
-  - '||lf*-data.volccdn.com^$important'
-  - '||irs03.com^$important'
   - '#针对墨迹天气的广告拦截规则'
   - '||reachmax.cn^$important'
   - '||logd.api.moji.com^$important'
@@ -1347,7 +1344,6 @@ user_rules:
   - '@@||adtrack.xiaojukeji.com^$important'
   - '#针对小米移动的误杀放行规则'
   - '@@||apm-rum.inf.miui.com^$important'
-  - '@@||tracking.miui.com^$important'
   - '#针对搜狗输入法的误杀放行规则'
   - '@@input.shouji.sogou.com^$important'
   - '#针对手心输入法的误杀放行规则'
@@ -1362,6 +1358,14 @@ user_rules:
   - '@@||zsusw.zs.gdgov.cn^$important'
   - '#针对中国电信的误杀放行规则'
   - '@@||mapi.bestpay.com.cn^$important'
+  - '#针对淘宝App开屏的广告拦截规则'
+  - '||midea-file.oss-cn-hangzhou.aliyuncs.com^$important'
+  - '||alibaba-cn-pvg-00001.oss-enet.aliyuncs.com^$important'
+  - '#针对掌上莲峰开屏的广告拦截规则'
+  - '||dcloud.net.cn^$important'
+  - '#针对三国志战略版的误杀放行规则'
+  - '@@||lingxigames.com^$important'
+  - '@@||aligames.com^$important'
 dhcp:
   enabled: false
   interface_name: ""

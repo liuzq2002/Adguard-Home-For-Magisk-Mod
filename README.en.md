@@ -15,6 +15,9 @@
 - Do **not** use with other similar ad-blocking modules
 - Cannot block ads served from the same domain as content (e.g., Twitch, YouTube, Instagram)
 ## 💡 Advantages Over Other Solutions
+### What are the advantages compared to non-AdguardHome DNS implementation solutions?
+1. AdguardHome, despite years of maintenance, still has high-risk CVE vulnerabilities; other competing solutions would only be worse (as their technical strength is not as profound as that of Adguard company).
+2. In terms of performance and power consumption, they may not be better than AdguardHome, which is written in Go language; the smaller the project, the fewer people monitor it, and the less likely it is to discover deep-seated vulnerabilities (especially since AdguardHome is a globally renowned open-source large project).
 ### vs. Private DNS
 1. No server dependency → no downtime or overload issues
 2. Lower latency – processing happens locally

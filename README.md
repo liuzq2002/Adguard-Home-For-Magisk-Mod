@@ -2,7 +2,6 @@
 <a href="https://deepwiki.com/liuzq2002/Adguard-Home-For-Magisk-Mod"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
 
  **简体中文** | [English](README.en.md)
- ## 本项目是1,000万元以内最好的去广告模块⚠️
 - 通过重定向过滤DNS请求屏蔽广告且带有模块系统的Root管理器通用
 - 本项目永久开源免费无捐赠及其变种，不以是否捐赠来区分版本
 - 达到了开箱即用的易用性、操作失误自动恢复，刷入模块后按照教程稍微排查一下即可使用（无需配置规则）

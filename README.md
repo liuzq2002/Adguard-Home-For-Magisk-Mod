@@ -69,13 +69,27 @@ flowchart TD
         W --> X[显示状态并控制模块]
     end
 
-    subgraph 生命周期
-        Y[安装 customize.sh] --> Z[备份旧配置、锁定脚本]
-        Z --> AA[解压文件、设置权限]
-        AA --> AB[恢复 PROXY_URL 原子迁移]
-        AC[卸载 uninstall.sh] --> AD[停止所有进程]
-        AD --> AE[还原第三方代理配置]
-        AE --> AF[解锁所有 chattr 文件并删除目录]
+    subgraph 安装流程
+        direction TB
+        I1[开始安装] --> I2[检测 hosts 模块冲突]
+        I2 -->|有冲突| I3[标记移除并提示重启]
+        I2 -->|无冲突| I4[停止旧进程]
+        I4 --> I5[解锁旧脚本 chattr -i]
+        I5 --> I6[删除被锁定的残留文件]
+        I6 --> I7[备份旧配置]
+        I7 --> I8[解压新文件并设置权限]
+        I8 --> I9[恢复 PROXY_URL 原子迁移]
+        I9 --> I10[锁定脚本 chattr +i]
+        I10 --> I11[安装完成，提示重启]
+    end
+
+    subgraph 卸载流程
+        direction TB
+        U1[开始卸载] --> U2[停止所有进程 pkill]
+        U2 --> U3[还原第三方代理配置]
+        U3 --> U4[解锁所有 chattr 文件]
+        U4 --> U5[删除 $AGH_DIR 和 $ADGPATH]
+        U5 --> U6[卸载完成，无残留]
     end
 
     style A fill:#f9f,stroke:#333
@@ -84,6 +98,8 @@ flowchart TD
     style L fill:#bfb,stroke:#333
     style M fill:#bfb,stroke:#333
     style N fill:#bfb,stroke:#333
+    style I1 fill:#ffa,stroke:#333
+    style U1 fill:#faa,stroke:#333
 ```
 
 ## ⚠️ 风险提示，不看请别怪我没提醒

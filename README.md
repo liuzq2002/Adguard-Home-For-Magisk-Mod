@@ -11,7 +11,7 @@
 - 已经兼容了Surfing、Box、AkashaProxy、Clash MIX代理模块，其余的暂不兼容
 - 不看教程不要来找我反馈，点此链接直接跳转到教程：[点击跳转](https://github.com/liuzq2002/Adguard-Home-For-Magisk-Mod/tree/main?tab=readme-ov-file#-%E6%95%99%E7%A8%8B%E4%B8%8D%E7%9C%8B%E7%9A%84%E8%AF%9D%E5%87%BA%E4%BA%8B%E5%88%AB%E5%88%B0%E5%A4%84%E6%89%BE%E6%88%91%E9%97%AE%E9%A2%98)
 
-# 模块架构设计图
+## 模块架构设计图
 ```mermaid
 flowchart TD
     subgraph 开机启动

@@ -10,6 +10,98 @@
 - 本项目旨在取代传统Hosts以带来更好的现代化体验——“零”广告侧漏、高性能、强隐蔽性
 - 已经兼容了Surfing、Box、AkashaProxy、Clash MIX代理模块，其余的暂不兼容
 - 不看教程不要来找我反馈，点此链接直接跳转到教程：[点击跳转](https://github.com/liuzq2002/Adguard-Home-For-Magisk-Mod/tree/main?tab=readme-ov-file#-%E6%95%99%E7%A8%8B%E4%B8%8D%E7%9C%8B%E7%9A%84%E8%AF%9D%E5%87%BA%E4%BA%8B%E5%88%AB%E5%88%B0%E5%A4%84%E6%89%BE%E6%88%91%E9%97%AE%E9%A2%98)
+
+# 模块架构设计图
+```mermaid
+flowchart TD
+    subgraph 开机启动
+        A[Magisk 触发 service.sh] --> B[解锁脚本 chattr -i]
+        B --> C[检测 hosts 模块冲突]
+        C -->|有冲突| D[标记移除并退出]
+        C -->|无冲突| E[动态随机化端口]
+        E --> F[修改 AdGuardHome.yaml 和 config.prop]
+        F --> G[启动 AdGuardHome 二进制]
+        G --> H[验证进程是否存在]
+        H -->|失败| I[exec service.sh 自重启]
+        H -->|成功| J[后台启动子脚本]
+    end
+
+    subgraph 常驻守护循环
+        J --> K[iptables.sh]
+        J --> L[NoAdsService.sh]
+        J --> M[ProxyConfig.sh]
+        J --> N[ModuleMOD.sh]
+        
+        K --> K1[每5秒检查 iptables 规则和 AGH 进程]
+        K1 -->|规则丢失| K2[重建规则并切换飞行模式]
+        K1 -->|AGH 丢失| K3[重启 AdGuardHome]
+        
+        L --> L1[每5秒收集广告目录路径]
+        L1 --> L2[批量 lsattr 检查已锁定]
+        L2 -->|未锁定| L3[rm -rf → mkdir → chattr +i 锁定]
+        L2 -->|已锁定| L4[跳过]
+        L1 --> L5[强制关闭私有 DNS]
+        L1 --> L6[清理 IFW 目录]
+        L1 --> L7[清理卸载残留]
+        
+        M --> M1[每5秒循环处理代理配置文件]
+        M1 --> M2[检查是否为标准配置]
+        M2 -->|非标准| M3[修改 YAML 中的 DNS 指向 AGH]
+        M3 --> M4[重启对应代理服务并刷新网络]
+        M2 -->|标准| M5[跳过]
+        
+        N --> N1[每5秒检测系统语言]
+        N1 -->|变化| N2[更新 module.prop 描述]
+        N1 -->|不变| N3[跳过]
+    end
+
+    subgraph 配置与数据
+        P[config.prop] -->|提供 redir_port| M
+        P -->|提供 redir_port| K
+        Q[AdGuardHome.yaml] -->|端口配置| G
+        R[AGH 进程] -.->|pgrep 监控| K
+    end
+
+    subgraph 外部交互
+        S[用户点击 action.sh] --> T[提取 Web UI 端口]
+        T --> U[am start 打开浏览器]
+        V[独立管理器 APK] --> W[读取 config.prop 和 YAML]
+        W --> X[显示状态并控制模块]
+    end
+
+    subgraph 安装流程
+        direction TB
+        I1[开始安装] --> I2[检测 hosts 模块冲突]
+        I2 -->|有冲突| I3[标记移除并提示重启]
+        I2 -->|无冲突| I4[停止旧进程]
+        I4 --> I5[解锁旧脚本 chattr -i]
+        I5 --> I6[删除被锁定的残留文件]
+        I6 --> I7[备份旧配置]
+        I7 --> I8[解压新文件并设置权限]
+        I8 --> I9[恢复 PROXY_URL 原子迁移]
+        I9 --> I10[锁定脚本 chattr +i]
+        I10 --> I11[安装完成，提示重启]
+    end
+
+    subgraph 卸载流程
+        direction TB
+        U1[开始卸载] --> U2[停止所有进程 pkill]
+        U2 --> U3[还原第三方代理配置]
+        U3 --> U4[解锁所有 chattr 文件]
+        U4 --> U5[删除 $AGH_DIR 和 $ADGPATH]
+        U5 --> U6[卸载完成，无残留]
+    end
+
+    style A fill:#f9f,stroke:#333
+    style G fill:#bbf,stroke:#333
+    style K fill:#bfb,stroke:#333
+    style L fill:#bfb,stroke:#333
+    style M fill:#bfb,stroke:#333
+    style N fill:#bfb,stroke:#333
+    style I1 fill:#ffa,stroke:#333
+    style U1 fill:#faa,stroke:#333
+```
+
 ## ⚠️ 风险提示，不看请别怪我没提醒
 - 更新到2026.03.31版本的切记不要降级刷入到更早之前的版本，不然卸载模块时会有残留
 - 模块会导致优惠券无法正常领取，如无法正常领取这并非误杀

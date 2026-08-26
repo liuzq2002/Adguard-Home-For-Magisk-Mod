@@ -6,5 +6,10 @@ adg_group="net_raw"
 # AdGuardHome DNS 重定向端口
 redir_port=5591
 
+# Clash VPN 使用的 TUN 网卡匹配名。
+# tun+ 会匹配 tun0、tun1 等以 tun 开头的网卡。
+# 设为 none 可关闭 VPN 网卡放行逻辑。
+vpn_interface="tun+"
+
 # 代理订阅链接（在引号内填入你的订阅）
 PROXY_URL=" "

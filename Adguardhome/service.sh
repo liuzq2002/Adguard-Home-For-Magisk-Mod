@@ -37,28 +37,30 @@ if [ "$found_hosts" = true ]; then
 fi
 
 # 动态端口随机化
+if ! pgrep "AdGuardHome"; then
 R1=$((30000+RANDOM%35536)); R2=$((30000+RANDOM%35536))
-sed -i "s/^\([[:space:]]*port:\) [0-9]*/\1 $R1/; s/^\([[:space:]]*address:\) 127\.0\.0\.1:[0-9]*/\1 127.0.0.1:$R2/" "$BIN_DIR/AdGuardHome.yaml"
-sed -i "s/^redir_port=.*/redir_port=$R1/" "$SCRIPT_DIR/config.prop" || echo "redir_port=$R1" > "$SCRIPT_DIR/config.prop"
+sed -i "/^dns:/,/^[^[:space:]]/ s/^\([[:space:]]*port:\) [0-9]*/\1 $R1/; s/^\([[:space:]]*address:\) 127\.0\.0\.1:[0-9]*/\1 127.0.0.1:$R2/" "$BIN_DIR/AdGuardHome.yaml"
+sed -i "s/^redir_port=.*/redir_port=$R1/" "$SCRIPT_DIR/config.prop"
 
 # 启动AdGuardHome
 export SSL_CERT_DIR="/system/etc/security/cacerts/"
 "$BIN_DIR/AdGuardHome" --no-check-update &
 
 # 验证AdGuardHome是否启动成功
-sleep 1
-if pgrep "AdGuardHome"; then
-    [ "$lang" = "zh" ] && echo "$(date '+%F %T') AdGuardHome 启动成功。" >> "$MAIN_LOG" || echo "$(date '+%F %T') AdGuardHome started successfully." >> "$MAIN_LOG"
-else
-    [ "$lang" = "zh" ] && echo "$(date '+%F %T') AdGuardHome启动失败，尝试重启..." >> "$MAIN_LOG" || echo "$(date '+%F %T') AdGuardHome failed to start, attempting restart..." >> "$MAIN_LOG"
-    exec "$0"
+    sleep 1
+    if pgrep "AdGuardHome"; then
+        [ "$lang" = "zh" ] && echo "$(date '+%F %T') AdGuardHome 启动成功。" >> "$MAIN_LOG" || echo "$(date '+%F %T') AdGuardHome started successfully." >> "$MAIN_LOG"
+    else
+        [ "$lang" = "zh" ] && echo "$(date '+%F %T') AdGuardHome启动失败，尝试重启..." >> "$MAIN_LOG" || echo "$(date '+%F %T') AdGuardHome failed to start, attempting restart..." >> "$MAIN_LOG"
+        exec "$0"
+    fi
 fi
 
 # 启动模块附加脚本
-"$SCRIPT_DIR/iptables.sh" &
-"$SCRIPT_DIR/ModuleMOD.sh" &
-"$SCRIPT_DIR/NoAdsService.sh" &
-"$SCRIPT_DIR/ProxyConfig.sh" &
+pgrep -f "$SCRIPT_DIR/iptables.sh" || "$SCRIPT_DIR/iptables.sh" &
+pgrep -f "$SCRIPT_DIR/ModuleMOD.sh" || "$SCRIPT_DIR/ModuleMOD.sh" &
+pgrep -f "$SCRIPT_DIR/NoAdsService.sh" || "$SCRIPT_DIR/NoAdsService.sh" &
+pgrep -f "$SCRIPT_DIR/ProxyConfig.sh" || "$SCRIPT_DIR/ProxyConfig.sh" &
 
 # 执行脚本防篡改保护
 find "$ADGPATH" -type f -name "*.sh" -exec chattr +i {} \;

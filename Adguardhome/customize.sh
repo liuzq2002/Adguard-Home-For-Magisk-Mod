@@ -30,29 +30,24 @@ for file in uninstall.sh module.prop service.sh action.sh; do
   unzip -o "$ZIPFILE" "$file" -d "$MODPATH"
 done
 
-# 正在停止ProxyConfig
-[ -f "$AGH_DIR/scripts/ProxyConfig.sh" ] && {
-    i18n_print "- Stopping ProxyConfig process" "- 正在终止ProxyConfig进程"
-    pkill -9 "ProxyConfig"
-}
-
 # 检查并停止运行中的进程
 if [ -d "$AGH_DIR" ]; then
-i18n_print "- Stopping all AdGuard Home processes" "- 正在终止AdGuard Home进程"
-pkill -9 "AdGuardHome"
+i18n_print "- Stopping AdGuardHome and its additional processes" "- 正在终止AdGuardHome及附加进程"
+for i in 1 2; do
+    found=0
+    for p in /proc/[0-9]*; do
+        IFS= read -r cmd < "$p/cmdline"
+        case "$cmd" in
+            "$AGH_DIR/bin/AdGuardHome"*|*"$AGH_DIR/scripts/"*)
+                kill -9 "${p#/proc/}"
+                found=1
+                ;;
+        esac
+    done
+    [ "$found" -eq 0 ] && break
+    sleep 1
+done
 fi
-
-# 正在停止NoAdsService
-[ -f "$AGH_DIR/scripts/NoAdsService.sh" ] && {
-    i18n_print "- Stopping NoAdsService process" "- 正在终止NoAdsService进程"
-    pkill -9 "NoAdsService"
-}
-
-# 正在停止ProxyConfig
-[ -f "$AGH_DIR/scripts/ProxyConfig.sh" ] && {
-    i18n_print "- Stopping ProxyConfig process" "- 正在终止ProxyConfig进程"
-    pkill -9 "ProxyConfig"
-}
 
 # 删除被锁定的残留文件
 [ -f "$AGH_DIR/scripts/NoAdsService.sh" ] && {
@@ -98,8 +93,7 @@ i18n_print "- Locking script files" "- 正在锁定脚本文件"
 find "$SCRIPT_DIR" -type f -name "*.sh" -exec chattr +i {} \;
 
 # 正在保留配置文件
-if [ -f "$BACKUP_DIR/config.prop" ]; then
-  i18n_print "- Preserving configuration file" "- 正在保留配置文件"
-  cp -f "$BACKUP_DIR/config.prop" "$SCRIPT_DIR/"
-fi
+[ -f "$BACKUP_DIR/config.prop" ] && \
+old_line=$(grep -m1 '^PROXY_URL=' "$BACKUP_DIR/config.prop") && \
+[ -n "$old_line" ] && { sed -i "/^PROXY_URL=/d" "$SCRIPT_DIR/config.prop"; printf "%s" "$old_line" >> "$SCRIPT_DIR/config.prop"; i18n_print "- Preserved PROXY_URL from backup" "- 已从备份恢复 PROXY_URL"; }
 i18n_print "- Installation complete. Reboot device." "- 安装完成，请重启设备。"

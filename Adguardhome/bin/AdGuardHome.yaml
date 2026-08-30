@@ -9,7 +9,7 @@ http:
       - GET /dns-query/{ClientID}
       - POST /dns-query/{ClientID}
     insecure_enabled: false
-  address: 127.0.0.1:40165
+  address: 127.0.0.1:40251
   session_ttl: 30d
 users:
   - name: root
@@ -22,7 +22,7 @@ theme: auto
 dns:
   bind_hosts:
     - 127.0.0.1
-  port: 62761
+  port: 54830
   anonymize_client_ip: false
   ratelimit: 0
   ratelimit_subnet_len_ipv4: 24
@@ -39,8 +39,9 @@ dns:
     - 2400:7fc0:849e:200::4
     - 2404:c2c0:85d8:901::4
   fallback_dns:
-    - https://doh-pure.onedns.net/dns-query
-    - https://doh.360.cn/dns-query
+    - https://101.226.4.6/dns-query
+    - https://218.30.118.6/dns-query
+    - https://123.125.81.6/dns-query
   upstream_mode: load_balance
   fastest_timeout: 1s
   allowed_clients: []
@@ -113,7 +114,7 @@ statistics:
   ignored_enabled: false
 filters:
   - enabled: true
-    url: https://raw.githubusercontent.com/8680/GOODBYEADS/master/data/rules/dns.txt
+    url: https://ghfast.top/raw.githubusercontent.com/8680/GOODBYEADS/master/data/rules/dns.txt
     name: GOODBYEADS
     id: 1721861846
   - enabled: true
@@ -122,7 +123,7 @@ filters:
     id: 1735560833
 whitelist_filters:
   - enabled: true
-    url: https://raw.githubusercontent.com/8680/GOODBYEADS/master/data/rules/allow.txt
+    url: https://ghfast.top/raw.githubusercontent.com/8680/GOODBYEADS/master/data/rules/allow.txt
     name: GOODBYEADS
     id: 1721861844
 user_rules:
@@ -835,7 +836,7 @@ user_rules:
   - '#拦截HTTPDNS相关域名链接'
   - '||hdns.ksyun.com$important'
   - '||apidns.kwd.inkuai.com^$important'
-  - '||httpdns.*^$important'
+  - '||*httpdns.*^$important'
   - '||dns*.weixin.qq.*^$important'
   - '||dns.qq.com^$important'
   - '||*dns.weixin.qq.*^$important'
@@ -849,6 +850,21 @@ user_rules:
   - '||dot.api.idmzj.com^$important'
   - '||doh.iqiyi.com^$important'
   - '||paydns.wechatpay.cn^$important'
+  - '||doh.qq.com^$important'
+  - '||dot.qq.com^$important'
+  - '||dns.taobao.com^$important'
+  - '||dns.tmall.com^$important'
+  - '||dns.pinduoduo.com^$important'
+  - '||dns.bytedance.com^$important'
+  - '||dns.toutiao.com^$important'
+  - '||dns.kuaishou.com^$important'
+  - '||dns.360.cn^$important'
+  - '||dns.sina.com.cn^$important'
+  - '||dns.sohu.com^$important'
+  - '||dns.163.com^$important'
+  - '||dns.yy.com^$important'
+  - '||dig.zjurl.cn^$important'
+  - '||dns2.q2cdn.com^$important'
   - '#针对网易云音乐的广告拦截规则'
   - '||nstool.netease.com^$important'
   - '||ssp-landing.taptap.cn^$important'
@@ -1154,8 +1170,6 @@ user_rules:
   - '||imageads.codoon.com^$important'
   - '||adsdkapi.dxys.pro^$important'
   - '||tobidad.*^$important'
-  - '#针对抖音App的放行规则'
-  - '@@||dig.bdurl.net^$important'
   - '#针对斗鱼直播的广告拦截规则'
   - '||rtbapi.douyucdn.cn^$important'
   - '#拦截小米智能服务系统级广告'
@@ -1303,7 +1317,6 @@ user_rules:
   - '@@||xn--vhq3x51dn9bivas49nfps.com^$important'
   - '#针对萤石云视频的广告拦截规则'
   - '||ad-material.*.com^$important'
-  - '||sdk-ab-config-cdn.yunxish.com^$important'
   - '||appdownload.ys7.com^$important'
   - '#针对123网盘App跳转误杀放行规则'
   - '@@||c.umsns.com^$important'
@@ -1366,6 +1379,17 @@ user_rules:
   - '#针对三国志战略版的误杀放行规则'
   - '@@||lingxigames.com^$important'
   - '@@||aligames.com^$important'
+  - '#针对淘宝闪购商家零售版放行规则'
+  - '@@||nracc.ele.me^$important'
+  - '#针对决胜巅峰的误杀放行规则'
+  - '@@||ad.moonton.cn^$important'
+  - '@@||tapapis.cn^$important'
+  - '@@||log.dailygn.com^$important'
+  - '#阻断ECH公钥链接防止流量绕过'
+  - '||_https.*^$important'
+  - '||_svcb.*^$important'
+  - '#小米应用安装器的放行规则'
+  - '@@||api.installer.xiaomi.com^$important'
 dhcp:
   enabled: false
   interface_name: ""
@@ -1406,11 +1430,12 @@ filtering:
   rewrites: []
   safe_fs_patterns:
     - /data/adb/agh/bin/data/userfilters/*
+  max_http_size: 256MB
   safebrowsing_cache_size: 1048576
   safesearch_cache_size: 1048576
   parental_cache_size: 1048576
   cache_time: 30
-  filters_update_interval: 1
+  filters_update_interval: 0
   blocked_response_ttl: 30
   filtering_enabled: true
   rewrites_enabled: true

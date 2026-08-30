@@ -75,6 +75,7 @@ process_config() {
 # 主函数
 i=0
 while :; do
+    . "$CONFIG_FILE"
     IFS='|' read -r config_file restart_cmd <<< "${PROXY_CONFIGS[$i]}"
     need_restart=0
     for config_file in $config_file; do

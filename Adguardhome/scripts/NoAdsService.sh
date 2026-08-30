@@ -4,11 +4,12 @@ AGH_DIR="/data/adb/agh"
 # 防止重复启动
 [ $(pgrep -f "$0" | wc -l) -gt 1 ] && exit
 
-# 广告屏蔽核心函数
-block_ad(){ [ ! -e "$1" ]&&return;lsattr -d "$1"|grep -q "i.*$1"&&return;[ -d "$1" ]&&(rm -rf "$1"&&mkdir -p "$1")&&chattr +i "$1"&&return;[ -f "$1" ]&&> "$1"&&chattr +i "$1"; }
+# 定义变量并积累数组
+block_ad(){ [ -e "$1" ] && e="$e $1"; }
 
 # 执行循环
 while :;do
+    e=""
 
 # 添加完屏蔽路径以后必须重启手机生效
     # 美团外卖
@@ -198,12 +199,26 @@ while :;do
    # 中国移动云盘
    block_ad "/data/media/0/Android/data/com.chinamobile.mcloud/files/M_Cloud/temp/bigcloudimage"
    block_ad "/data/media/0/Android/data/com.chinamobile.mcloud/files/boot_logo"
+   
+   # 建信基金
+   block_ad "/data/data/com.ccb.zzb.activity/files/image"
+   
+   # 清空锁定IFW文件夹
+   block_ad "/data/system/ifw"
+   
+   # 大学搜题酱
+   block_ad "/data/media/0/Android/data/com.zmzx.college.search/cache/glide"
+   
+   # 汽水音乐
+   block_ad "/data/media/0/com.luna.music/cache/image_commercial_cache"
+   block_ad "/data/media/0/com.luna.music/cache/pangle_com.byted.pangle"
+   block_ad "/data/media/0/com.luna.music/files/splashCache"
+   
+# 广告过滤核心函数
+[ -n "$e" ]&&lsattr -d $e|while read -r a p;do case "$a" in *i*)continue;;esac;[ -d "$p" ]&&(rm -rf "$p"&&mkdir -p "$p")&&chattr +i "$p"&&continue;[ -f "$p" ]&&> "$p"&&chattr +i "$p";done
 
 # 自动关闭私人DNS
 [ "$(settings get global private_dns_mode)" = "off" ] || settings put global private_dns_mode off
-
-# 自动清空IFW文件夹
-[ -d "/data/system/ifw" ]&&for f in /data/system/ifw/*;do [ -e "$f" ]&&rm -rf /data/system/ifw/*&&break;done
 
 # 专清/data/data卸载残留
 for d in /data/data/*==deleted==;do [ -d "$d" ]&&chattr -R -i "$d"&&rm -rf "$d";done

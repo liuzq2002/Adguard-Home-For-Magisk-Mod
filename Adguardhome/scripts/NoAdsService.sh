@@ -18,7 +18,7 @@ while :;do
     
     # 知乎App
     block_ad "/data/data/com.zhihu.android/files/ad"
-    
+
     # 哔哩哔哩
     block_ad "/data/data/tv.danmaku.bili/files/res_cache"
     block_ad "/data/data/tv.danmaku.bili/files/update"
@@ -216,6 +216,10 @@ while :;do
    
 # 广告过滤核心函数
 [ -n "$e" ]&&lsattr -d $e|while read -r a p;do case "$a" in *i*)continue;;esac;[ -d "$p" ]&&(rm -rf "$p"&&mkdir -p "$p")&&chattr +i "$p"&&continue;[ -f "$p" ]&&> "$p"&&chattr +i "$p";done
+
+   # Coolapk
+    block_ad "/data/data/com.coolapk.market/app_adnet/"
+    
 
 # 自动关闭私人DNS
 [ "$(settings get global private_dns_mode)" = "off" ] || settings put global private_dns_mode off

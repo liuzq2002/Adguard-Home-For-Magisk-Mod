@@ -2,7 +2,8 @@
 <a href="https://deepwiki.com/liuzq2002/Adguard-Home-For-Magisk-Mod"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
 
  **简体中文** | [English](README.en.md)
-- 通过重定向过滤DNS请求屏蔽广告且带有模块系统的Root管理器通用
+- 通过重定向过滤DNS请求+SNI阻断去告且带有模块系统的Root管理器通用
+- 本项目自己定制了一个魔改核心，现在已开源并可以点此链接进行访问[点击跳转](https://github.com/liuzq2002/AdguardHome-Mod)
 - 本项目永久开源免费无捐赠及其变种，不以是否捐赠来区分版本
 - 达到了开箱即用的易用性、操作失误自动恢复，刷入模块后按照教程稍微排查一下即可使用（无需配置规则）
 - 内置了GOODBYEADS的拦截规则并在此基础上增加了自定义规则

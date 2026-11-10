@@ -1,6 +1,5 @@
 # Adguard Home For Android
-<a href="https://deepwiki.com/liuzq2002/Adguard-Home-For-Magisk-Mod"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
-
+## 近期有人用我的署名仿冒，请注意甄别（非liuzq2002 Github下载一律为仿冒）
  **简体中文** | [English](README.en.md)
 - 通过重定向过滤DNS请求+SNI阻断去告且带有模块系统的Root管理器通用
 - 本项目自己定制了一个魔改核心，现在已开源并可以点此链接进行访问[点击跳转](https://github.com/liuzq2002/AdguardHome-Mod)
@@ -165,10 +164,6 @@ graph TD
 - 代理模块教程：订阅链接只能填一个且在/data/adb/agh/scripts/config.prop中填入你的机场订阅保存重启即可自动兼容代理模块，剩下的交给模块自行处理就行
 - 中国科学大学测速网：[点击跳转](https://test.ustc.edu.cn)
 - 测试广告拦截是否正常（达到96%或以上是正常）：[点击跳转](https://paileactivist.github.io/toolz/adblock.html)
-## 💬 获取联系方式
-- 聊天闲聊群：[点击链接加入群聊](https://qun.qq.com/universal-share/share?ac=1&authKey=l2FNOfui75SDr9n8qTfNjibiF1aTpQ%2B0cmJrw7iKnj%2B95dyExNG5LrdCJu5%2FEKrQ&busi_data=eyJncm91cENvZGUiOiI3NDY2NDA0NjQiLCJ0b2tlbiI6ImhOUWgzVTFPYnRUcEw1ZEJ1TnhkOGI4b0ZQSFV6cmtuVkludk5EcDR4WTFXSU5PelVmdnZoUHIwOGEreHVnNEYiLCJ1aW4iOiIzMzEzODI0NTc1In0%3D&data=8QbRVdmvcvuIPhoaZYMQRNm8tdG9QvQ_d6dLJvGEW_XEOWLbexxs8SgTRPfW51Tpe7IGWAu3PpizEpFa9oO1LQ&svctype=4&tempid=h5_group_info)
-- 反馈测试组：[点击链接加入群聊](https://qun.qq.com/universal-share/share?ac=1&authKey=CnRMCNMYpq8urYWFDHU1Hr8cDAdDaVGHc6NQ4cyNJlYsaf2AGI14CAmwadmXpPjk&busi_data=eyJncm91cENvZGUiOiIyMTY3MDQ4MzI2IiwidG9rZW4iOiJTcjF1NENkZC9uNzMyMW52cnJITmdQRURQR25LOXkrWlV2d3BNbTNpdTl1dHk4M1ZVSUFYZDMwdGhaSU1JTE1sIiwidWluIjoiMzMxMzgyNDU3NSJ9&data=qW-Iwd_M-T4oba0swGdorSGKcUbyHUIRmYV8nVcUVA320bVl97MIQsLZpfxDc9zWSCZSVB2nsKmK-oLu96JB6Q&svctype=4&tempid=h5_group_info)
-- 绮梦社区友情链接：[点击链接进入官网](https://vlink.cc/ceromis)
 ## 🙏 鸣谢项目名单
 - [AdguardHome_magisk](https://github.com/410154425/AdGuardHome_magisk)
 - [akashaProxy](https://github.com/ModuleList/akashaProxy)

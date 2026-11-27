@@ -64,8 +64,7 @@ process_config() {
     }
     clean_config "$1"
     for section in $ALL_SECTIONS; do
-        sed -i "/^[[:space:]]*['\"]*${section}/,/^[[:space:]]*[^[:space:]#'\"=-]/{/- $LOCAL_DNS/! s/^\\([[:space:]]*\\)\\(-[[:space:]]*[^#].*\\)/\\1# \\2/;/- $LOCAL_DNS/b;/^[[:space:]]*['\"]*${section}/{n;:l;/^[[:space:]]*#*[[:space:]]*-/!{n;bl};/- $LOCAL_DNS/!{s/^\\([[:space:]]*\\)\\(#*[[:space:]]*-[[:space:]]*.*\\)/\\1- $LOCAL_DNS\\
-\\1# \\2/}}}" "$1"
+        sed -i "/^[[:space:]]*['\"]*${section}/,/^[[:space:]]*[^[:space:]#'\"=-]/{/- $LOCAL_DNS/! s/^\\([[:space:]]*\\)\\(-[[:space:]]*[^#].*\\)/\\1# \\2/;/- $LOCAL_DNS/b;/^[[:space:]]*['\"]*${section}/{n;:l;/^[[:space:]]*#*[[:space:]]*-/!{n;bl};/- $LOCAL_DNS/!{s/^\\([[:space:]]*\\)\\(#*[[:space:]]*-[[:space:]]*.*\\)/\\1- $LOCAL_DNS\\\n\\1# \\2/}}}" "$1"
     done
     [ $modified -eq 1 ] && return 0
     grep -q "$LOCAL_DNS" "$1"
@@ -73,25 +72,26 @@ process_config() {
 }
 
 # 主函数
-i=0
 while :; do
-    . "$CONFIG_FILE"
-    IFS='|' read -r config_file restart_cmd <<< "${PROXY_CONFIGS[$i]}"
-    need_restart=0
-    for config_file in $config_file; do
-        [ ! -f "$config_file" ] && continue
-        [ "$1" = "--clean" ] && clean_config "$config_file" && continue
-        process_config "$config_file"
-        [ $? -eq 0 ] && need_restart=1
+    [ -f "$CONFIG_FILE" ] && . "$CONFIG_FILE"
+    LOCAL_DNS="127.0.0.1:${redir_port}"
+    found_any=0
+    for entry in "${PROXY_CONFIGS[@]}"; do
+        IFS='|' read -r config_glob restart_cmd <<< "$entry"
+        need_restart=0
+        for config_file in $config_glob; do
+            [ ! -f "$config_file" ] && continue
+            found_any=1
+            [ "$1" = "--clean" ] && clean_config "$config_file" && continue
+            process_config "$config_file"
+            [ $? -eq 0 ] && need_restart=1
+        done
+        [ "$1" != "--clean" ] && [ $need_restart -eq 1 ] && restart_service "$restart_cmd"
     done
-    if [ "$1" = "--clean" ]; then
-        if [ $((i+1)) -eq ${#PROXY_CONFIGS[@]} ]; then
-            exit 0
-        fi
-        i=$((i+1))
-        continue
+    [ "$1" = "--clean" ] && exit 0
+    if [ $found_any -eq 1 ]; then
+        sleep "${proxy_interval:-30}"
+    else
+        sleep "${proxy_idle_interval:-300}"
     fi
-    [ $need_restart -eq 1 ] && restart_service "$restart_cmd"
-    i=$(( (i+1) % ${#PROXY_CONFIGS[@]} ))
-    sleep 5
 done

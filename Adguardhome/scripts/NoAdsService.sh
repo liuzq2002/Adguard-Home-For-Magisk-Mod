@@ -1,5 +1,6 @@
 #!/system/bin/sh
 AGH_DIR="/data/adb/agh"
+[ -f "$AGH_DIR/scripts/config.prop" ] && . "$AGH_DIR/scripts/config.prop"
 
 # 防止重复启动
 [ $(pgrep -f "$0" | wc -l) -gt 1 ] && exit
@@ -9,6 +10,7 @@ block_ad(){ [ -e "$1" ] && e="$e $1"; }
 
 # 执行循环
 while :;do
+    [ -f "$AGH_DIR/scripts/config.prop" ] && . "$AGH_DIR/scripts/config.prop"
     e=""
 
 # 添加完屏蔽路径以后必须重启手机生效
@@ -223,6 +225,6 @@ while :;do
 # 专清/data/data卸载残留
 for d in /data/data/*==deleted==;do [ -d "$d" ]&&chattr -R -i "$d"&&rm -rf "$d";done
 
-# 延迟启动
-sleep 5
+# 延迟轮询，降低待机唤醒开销
+sleep "${noads_interval:-120}"
 done

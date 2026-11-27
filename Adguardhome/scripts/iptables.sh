@@ -69,5 +69,5 @@ while true; do
     ip6tables -w 2 -C OUTPUT -p tcp --dport 53 -j DROP || need_fix=1
     [ $need_restart -eq 1 ] && start_agh
     [ $need_restart -eq 1 ] || [ $need_fix -eq 1 ] && rebuild_rules
-    sleep 5
+    sleep "${iptables_interval:-30}"
 done &

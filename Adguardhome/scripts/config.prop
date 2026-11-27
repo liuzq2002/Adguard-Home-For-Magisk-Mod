@@ -4,3 +4,10 @@ redir_port=5591
 
 # 代理订阅链接（在引号内填入你的订阅）
 PROXY_URL=" "
+
+# 守护脚本轮询间隔（秒），默认已针对待机续航优化
+iptables_interval=30
+noads_interval=120
+module_mod_interval=300
+proxy_interval=30
+proxy_idle_interval=300

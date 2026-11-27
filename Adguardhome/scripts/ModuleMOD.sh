@@ -8,6 +8,7 @@ LAST_LOCALE="INIT"
 
 # 语言检测相关
 while true; do
+  [ -f "$SCRIPTS_DIR/config.prop" ] && . "$SCRIPTS_DIR/config.prop"
   CURRENT_LOCALE=$(getprop persist.sys.locale)
   [ -z "$CURRENT_LOCALE" ] && CURRENT_LOCALE="zh" 
   if [ "$LAST_LOCALE" = "INIT" ] || [ "$LAST_LOCALE" != "$CURRENT_LOCALE" ]; then
@@ -19,8 +20,8 @@ while true; do
       sed -i "s|^description=.*|description=DNS-level ad blocking and anti-DNS hijacking. Port Randomization at Startup. Click the action button on the Manager page to proceed. Do not modify built-in rules or configuration. login: root/root.|" "$MOD_PATH/module.prop"
     fi    
     LAST_LOCALE="$CURRENT_LOCALE"
-fi
+  fi
 
-# 延迟启动
-  sleep 5
+  # 延迟轮询，降低待机唤醒开销
+  sleep "${module_mod_interval:-300}"
 done
